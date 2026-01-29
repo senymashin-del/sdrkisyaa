@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Игры — Кися</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <ul>
+            <li><a href="index.html">Главная</a></li>
+            <li><a href="gallery.html">Фотогалерея</a></li>
+            <li><a href="wishes.html">Пожелания</a></li>
+            <li><a href="memories.html">Воспоминания</a></li>
+            <li><a href="games.html" class="active">Игры</a></li>
+            <li><a href="music.html">Музыка</a></li>
+            <li><a href="surprises.html">Сюрпризы</a></li>
+            <li><a href="confessions.html">Признания</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <h1 class="gradient-text">🧠 Мини-игры для настроения</h1>
+
+        <div class="card game-container">
+            <h3>Игра: Найди пары</h3>
+            <p>Нажимай на карточки, чтобы найти пары — попробуй набрать рекорд в честь Киси!</p>
+            <div class="memory-game" id="memory"></div>
+            <div style="text-align:center; margin-top:15px;"><button class="btn btn-green" onclick="startGame()">Начать игру</button></div>
+            <p style="text-align:center; margin-top:10px;">Очки: <span id="score">0</span></p>
+        </div>
+
+        <div class="card game-container">
+            <h3>Игра: Угадай число</h3>
+            <p>Я загадал число от 1 до 100 — попробуй угадать. Я подскажу «больше» или «меньше».</p>
+            <div style="text-align:center; margin-top:10px;">
+                <input id="guessInput" type="number" min="1" max="100" placeholder="1-100" style="padding:10px; border-radius:8px; border:none; width:120px;">
+                <button class="btn btn-green" onclick="checkGuess()">Попробовать</button>
+                <button class="btn btn-pink" onclick="newGuess()" style="margin-left:8px;">Новая игра</button>
+            </div>
+            <p style="text-align:center; margin-top:10px;">Ходов: <span id="guessCount">0</span></p>
+            <p id="guessFeedback" style="text-align:center; margin-top:8px; font-weight:bold;"></p>
+        </div>
+
+        <div class="card game-container">
+            <h3>Колесо сюрпризов</h3>
+            <p>Крути колесо — получи секретное приятное сообщение!</p>
+            <div style="text-align:center; margin-top:15px; position:relative;">
+                <div class="wheel" id="wheel">
+                    <div class="wheel-inner" id="wheelInner">
+                        <div class="segment">Целуй</div>
+                        <div class="segment">Обниму</div>
+                        <div class="segment">Песенка</div>
+                        <div class="segment">Сюрприз</div>
+                        <div class="segment">Подарок</div>
+                        <div class="segment">Пицца?</div>
+                    </div>
+                </div>
+                <div class="wheel-pointer" aria-hidden="true">▲</div>
+            </div>
+            <div style="text-align:center; margin-top:15px;">
+                <button class="btn btn-purple" id="spinBtn" onclick="spinWheel()">Крутить колесо 🎡</button>
+            </div>
+            <p id="wheelResult" style="text-align:center; margin-top:12px; font-weight:bold;"></p>
+        </div>
+    </div>
+
+    <footer>
+        <p>Играй и улыбайся, моя любимая Кися 💫</p>
+    </footer>
+
+    <script>
+        const images = ['❣️','🌟','🍰','🎈','🎁','🎵','🌷','✨'];
+        let cards = [];
+        let first = null;
+        let second = null;
+        let lock = false;
+        let score = 0;
+
+        function startGame() {
+            score = 0; document.getElementById('score').innerText = score;
+            cards = [...images, ...images].sort(() => Math.random() - 0.5);
+            const board = document.getElementById('memory');
+            board.innerHTML = '';
+            for (let i = 0; i < cards.length; i++) {
+                const c = document.createElement('div');
+                c.className = 'memory-card';
+                c.dataset.val = cards[i];
+                c.innerHTML = '<div style="font-size:28px; display:flex; align-items:center; justify-content:center; height:100%;">?</div>';
+                c.addEventListener('click', () => flipCard(c));
+                board.appendChild(c);
+            }
+        }
+
+        function flipCard(card) {
+            if (lock || card === first || card.classList.contains('matched')) return;
+            card.innerHTML = `<div style="font-size:28px; display:flex; align-items:center; justify-content:center; height:100%;">${card.dataset.val}</div>`;
+            if (!first) { first = card; return; }
+            second = card;
+            if (first.dataset.val === second.dataset.val) {
+                first.classList.add('matched'); second.classList.add('matched');
+                score += 10; document.getElementById('score').innerText = score;
+                first = second = null;
+                if (document.querySelectorAll('.memory-card.matched').length === cards.length) {
+                    setTimeout(()=> alert('Поздравляю! Рекорд для Киси: ' + score), 200);
+                }
+            } else {
+                lock = true;
+                setTimeout(() => {
+                    first.innerHTML = '<div style="font-size:28px; display:flex; align-items:center; justify-content:center; height:100%;">?</div>';
+                    second.innerHTML = '<div style="font-size:28px; display:flex; align-items:center; justify-content:center; height:100%;">?</div>';
+                    first = second = null; lock = false;
+                }, 700);
+            }
+        }
+
+        window.onload = function() {
+            startGame();
+            newGuess();
+            const wheelInner = document.getElementById('wheelInner');
+            if (wheelInner) {
+                const segs = Array.from(wheelInner.querySelectorAll('.segment'));
+                const radiusOffset = 110; // px — смещение от центра до текста
+                segs.forEach((s,i)=> {
+                    s.style.position = 'absolute';
+                    s.style.left = '50%';
+                    s.style.top = '50%';
+                    s.style.width = 'auto';
+                    s.style.height = 'auto';
+                    // Сначала центрируем элемент, затем поворачиваем и смещаем на radiusOffset пикселей вверх
+                    s.style.transform = `translate(-50%,-50%) rotate(${i*60}deg) translate(0,-${radiusOffset}px)`;
+                    s.style.transformOrigin = '50% 50%';
+
+                    // Оборачиваем текст в span и поворачиваем обратно, чтобы текст оставался горизонтальным
+                    const txt = s.innerText;
+                    s.innerHTML = `<span class="segment-text">${txt}</span>`;
+                    const span = s.querySelector('.segment-text');
+                    span.style.transform = `rotate(${-i*60}deg)`;
+                });
+            }
+        };
+
+        // ====== Угадай число ======
+        let secretNumber = 0;
+        let guessCount = 0;
+        function newGuess() {
+            secretNumber = 1 + Math.floor(Math.random() * 100);
+            guessCount = 0;
+            const gc = document.getElementById('guessCount'); if (gc) gc.innerText = guessCount;
+            const gf = document.getElementById('guessFeedback'); if (gf) gf.innerText = '';
+            const inp = document.getElementById('guessInput'); if (inp) inp.value = '';
+        }
+        function checkGuess() {
+            const inp = document.getElementById('guessInput');
+            if (!inp) return;
+            const val = parseInt(inp.value, 10);
+            if (!val || val < 1 || val > 100) {
+                const gf = document.getElementById('guessFeedback'); if (gf) gf.innerText = 'Введите число от 1 до 100';
+                return;
+            }
+            guessCount++;
+            const gc = document.getElementById('guessCount'); if (gc) gc.innerText = guessCount;
+            if (val === secretNumber) {
+                const gf = document.getElementById('guessFeedback'); if (gf) gf.innerText = 'Правильно! Ты молодец! ❤️';
+                showConfetti(); setTimeout(()=>{ for(let i=0;i<10;i++) createHeart(false); }, 300);
+            } else if (val < secretNumber) {
+                const gf = document.getElementById('guessFeedback'); if (gf) gf.innerText = 'Больше! ↑';
+            } else {
+                const gf = document.getElementById('guessFeedback'); if (gf) gf.innerText = 'Меньше! ↓';
+            }
+        }
+
+        // ====== Колесо сюрпризов ======
+        function spinWheel() {
+            const btn = document.getElementById('spinBtn');
+            const wheelInner = document.getElementById('wheelInner');
+            if (!wheelInner || btn.disabled) return;
+            btn.disabled = true;
+            const spins = 3 + Math.floor(Math.random()*4);
+            const extra = Math.floor(Math.random()*360);
+            const deg = spins*360 + extra;
+            wheelInner.style.transition = 'transform 5s cubic-bezier(.2,.9,.2,1)';
+            wheelInner.style.transform = `rotate(${deg}deg)`;
+            setTimeout(() => {
+                const final = deg % 360;
+                const index = Math.floor(((360 - final) + 30) % 360 / 60) % 6;
+                const segs = Array.from(wheelInner.querySelectorAll('.segment'));
+                const result = segs[index] ? segs[index].innerText : 'Сюрприз!';
+                const out = document.getElementById('wheelResult'); if (out) out.innerText = 'Выпало: ' + result + ' ❤️';
+                showConfetti(); for(let i=0;i<8;i++) createHeart(false);
+                btn.disabled = false;
+            }, 5200);
+        }
+    </script>
+</body>
+</html>

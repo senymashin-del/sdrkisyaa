@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Музыка — Кися</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <ul>
+            <li><a href="index.html">Главная</a></li>
+            <li><a href="gallery.html">Фотогалерея</a></li>
+            <li><a href="wishes.html">Пожелания</a></li>
+            <li><a href="memories.html">Воспоминания</a></li>
+            <li><a href="games.html">Игры</a></li>
+            <li><a href="music.html" class="active">Музыка</a></li>
+            <li><a href="surprises.html">Сюрпризы</a></li>
+            <li><a href="confessions.html">Признания</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <div class="hero"><h2>Музыка</h2><p>Плейлист нашей любви)</p></div>
+        <h1 class="gradient-text">🎶 Плейлист для Киси</h1> 
+
+        <div class="card music-player">
+            <p style="text-align:center;">Немножко песен которые связаны с нами)</p>
+            <div style="display:flex; gap:12px; align-items:center; justify-content:center; margin-top:10px; flex-wrap:wrap;">
+                <audio id="audio" controls src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" style="width:300px"></audio>
+                <div style="display:flex; gap:8px; align-items:center;">
+                    <button class="btn" id="prevTrack">◀</button>
+                    <button class="btn" id="nextTrack">▶</button>
+                </div>
+            </div>
+
+            <div class="playlist" id="playlist"></div>
+
+            <div class="audio-visualizer" id="visualizer">
+                <div class="bar" id="b1"></div>
+                <div class="bar" id="b2"></div>
+                <div class="bar" id="b3"></div>
+                <div class="bar" id="b4"></div>
+                <div class="bar" id="b5"></div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>Музыка — как наши эмоции, всегда с тобой 💖</p>
+    </footer>
+
+    <script>
+        const audio = document.getElementById('audio');
+        const bars = [1,2,3,4,5].map(i => document.getElementById('b'+i));
+        const playlistEl = document.getElementById('playlist');
+
+        const tracks = [
+            { title: 'The Weeknd feat. Lily Rose Depp & Ramsey - Fill The Void', src: 'snd/wknd.mp3'},
+            { title: 'Lil peep feat. Ghostemane - Niagara', src: 'snd/ngra.mp3'},
+            { title: 'W.AVE - Breathe', src: 'snd/brth.mp3'},
+            { title: '6ix9ine - FAH', src: 'snd/69fh.mp3'},
+            { title: 'Jiandro feat. ola.wav - Confess Your Love', src: 'snd/cful.mp3'},
+            { title: 'Nutcase22 - Captain', src: 'snd/cptn.mp3'},
+            { title: 'Jasiah feat. 6ix9ine - Case 19', src: 'snd/cs19.mp3'},
+            { title: 'PlayBoi Carti - Evil Jordan', src: 'snd/evjr.mp3'},
+            { title: 'Lithe feat. NAV - Fall Back', src: 'snd/flbk.mp3'},
+            { title: 'NEDRI - FREESTYLE 2023', src: 'snd/frsl.mp3'},
+            { title: 'Lithe - Signs', src: 'snd/sgns.mp3'},
+            { title: 'Mikeeysmind feat. DaDanny - Go Crazy', src: 'snd/gczy.mp3'},
+            { title: 'Offset feat. 21 Savage, Metro Boomin & Travi$ Scott - Ghostface Killers', src: 'snd/gskl.mp3'},
+            { title: 'Travi$ Scott - Highest in the Room', src: 'snd/hitr.mp3'},
+            { title: 'Billie Eilish feat. Khalid - Lovely', src: 'snd/lvly.mp3'},
+            { title: 'Playboi Carti - MOJO JOJO', src: 'snd/mojo.mp3'},
+            { title: 'Post Malone - Motley Crew', src: 'snd/mtlc.mp3'},
+            { title: 'Travi$ Scott - MY EYES', src: 'snd/myes.mp3'},
+            { title: 'The Weeknd - Party Monster', src: 'snd/ptmr.mp3'},
+            { title: 'Joyner Lucas feat. Lil Baby - Ramen&OJ (my boy)', src: 'snd/rmoj.mp3'},
+            { title: 'Alina Libkind - Songs About Love', src: 'snd/salv.mp3'},
+            { title: 'Ramirez fear. $uicideBoy$ - Sarcophagus 2', src: 'snd/src2.mp3'},
+            { title: 'Metro Boomin feat. Travi$ Scott & Young Thug - Trance', src: 'snd/trnc.mp3'}
+            
+        ];
+
+        let currentTrack = 0;
+
+        function renderPlaylist(){
+            const favs = JSON.parse(localStorage.getItem('musicFavs')||'{}');
+            playlistEl.innerHTML = tracks.map((t,i)=> `<div class="track ${i===currentTrack?'playing':''}"><div>${t.title}</div><div><button class="btn" onclick="playTrack(${i})">▶</button><button class="btn btn-pink" onclick="toggleFav(${i})">${favs[i]?'💖':'🤍'}</button></div></div>`).join('');
+        }
+
+        function playTrack(i){
+            currentTrack = i; audio.src = tracks[i].src; audio.play(); renderPlaylist();
+        }
+
+        function toggleFav(i){ const favs = JSON.parse(localStorage.getItem('musicFavs')||'{}'); favs[i] = !favs[i]; localStorage.setItem('musicFavs', JSON.stringify(favs)); renderPlaylist(); }
+
+        function animateBars() {
+            if (audio.paused) { bars.forEach(b => b.style.height = '10px'); return; }
+            bars.forEach((b, idx) => b.style.height = (20 + Math.random()*(120 + idx*20)) + 'px');
+        }
+
+        audio.addEventListener('play', () => { window.visInterval = setInterval(animateBars, 140); renderPlaylist(); });
+        audio.addEventListener('pause', () => { clearInterval(window.visInterval); animateBars(); renderPlaylist(); });
+
+        document.getElementById('prevTrack').addEventListener('click', ()=> playTrack((currentTrack-1+tracks.length)%tracks.length));
+        document.getElementById('nextTrack').addEventListener('click', ()=> playTrack((currentTrack+1)%tracks.length));
+
+        // keyboard
+        document.addEventListener('keydown', (e)=>{
+            if (e.code === 'Space') { e.preventDefault(); if (audio.paused) audio.play(); else audio.pause(); }
+            if (e.key === 'ArrowRight') playTrack((currentTrack+1)%tracks.length);
+            if (e.key === 'ArrowLeft') playTrack((currentTrack-1+tracks.length)%tracks.length);
+        });
+
+        // init
+        renderPlaylist();
+    </script>
+    <div id="toast" aria-live="polite"></div>
+    <div class="back-to-top" id="backToTop" role="button" aria-label="Наверх" tabindex="0">⬆</div>
+    <script>
+        (function(){
+            const btn = document.getElementById('backToTop');
+            window.addEventListener('scroll', ()=>{ if (window.scrollY > 200) btn.classList.add('visible'); else btn.classList.remove('visible'); });
+            btn.addEventListener('click', ()=> window.scrollTo({top:0, behavior:'smooth'}));
+            btn.addEventListener('keydown', (e)=>{ if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); window.scrollTo({top:0, behavior:'smooth'}); } });
+            // highlight active nav link
+            try{ document.querySelectorAll('.navbar a').forEach(a=>{ if (location.href.includes(a.href)) a.classList.add('active'); }); }catch(e){}
+        })();
+    </script>
+</body>
+</html>

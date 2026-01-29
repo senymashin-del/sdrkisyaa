@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Пожелания — Кися</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <ul>
+            <li><a href="index.html">Главная</a></li>
+            <li><a href="gallery.html">Фотогалерея</a></li>
+            <li><a href="wishes.html" class="active">Пожелания</a></li>
+            <li><a href="memories.html">Воспоминания</a></li>
+            <li><a href="games.html">Игры</a></li>
+            <li><a href="music.html">Музыка</a></li>
+            <li><a href="surprises.html">Сюрпризы</a></li>
+            <li><a href="confessions.html">Признания</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <div class="hero"><h2>Пожелания</h2><p>Тёплые пожелания для тебя)</p></div>
+        <h1 class="gradient-text">🎁 Пожелания для Киси</h1>
+        <p style="text-align:center;">Я люблюю тебяяя))</p>
+
+        <div class="card">
+            <h3>Добавить пожелание</h3>
+            <form id="wishForm">
+                <textarea id="wishText" rows="4" style="width:100%; padding:10px; border-radius:10px;" placeholder="Можно написать свои пожелания..."></textarea>
+                <div style="text-align:center; margin-top:15px;">
+                    <button class="btn btn-pink" type="submit">Добавить</button>
+                </div>
+            </form>
+        </div>
+
+        <div class="card">
+            <h3>Список пожеланий <span class="badge" id="wishCount">0</span></h3>
+            <div style="text-align:right; margin-bottom:8px;"><button class="btn btn-purple" id="clearWishes">Очистить всё</button></div>
+            <div id="wishesList"></div>
+        </div>
+    </div>
+
+    <footer>
+        <p>Твои пожелания сохраняются в браузере — можно вернуться и посмотреть позже ✨</p>
+    </footer>
+
+    <script>
+document.addEventListener('DOMContentLoaded', () => {
+    const form = document.getElementById('wishForm');
+    const list = document.getElementById('wishesList');
+    const countEl = document.getElementById('wishCount');
+
+    // Защищённая функция получения данных из localStorage
+    function getWishes() {
+        try {
+            const raw = localStorage.getItem('wishes');
+            if (!raw) return [];
+            
+            const parsed = JSON.parse(raw);
+            // Убедимся, что это именно массив объектов с полем "text"
+            return Array.isArray(parsed) && parsed.every(item => 
+                typeof item === 'object' && item !== null && 'text' in item
+            ) ? parsed : [];
+        } catch (e) {
+            console.error('Ошибка чтения пожеланий:', e);
+            return [];
+        }
+    }
+
+    // Защищённая функция сохранения
+    function saveWishes(items) {
+        try {
+            localStorage.setItem('wishes', JSON.stringify(items));
+        } catch (e) {
+            console.error('Ошибка сохранения пожеланий:', e);
+            alert('Не удалось сохранить пожелание. Возможно, закончилось место в localStorage.');
+        }
+    }
+
+    function escapeHtml(s) {
+        if (typeof s !== 'string') return '';
+        return s.replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;')
+                .replace(/'/g, '&#039;');
+    }
+
+    function renderWishes() {
+        const items = getWishes();
+        countEl.innerText = items.length;
+        
+        if (!items.length) {
+            list.innerHTML = '<p style="text-align:center; color:rgba(255,255,255,0.6);">Здесь пока пусто — добавь сердечное пожелание</p>';
+            return;
+        }
+
+        list.innerHTML = items.map((w, i) => `
+            <div class="confession-item" data-idx="${i}">
+                <div style="display:flex; justify-content:space-between; gap:10px; align-items:center; padding:12px; border-bottom:1px solid rgba(255,255,255,0.1);">
+                    <div style="flex:1; word-break:break-word;">${escapeHtml(w.text)}</div>
+                    <div style="display:flex; gap:8px; align-items:center; flex-shrink:0;">
+                        <button class="btn btn-pink" style="padding:6px 10px;" onclick="toggleLike(${i})">${w.liked ? '💖' : '🤍'}</button>
+                        <button class="btn" style="padding:6px 10px;" onclick="copyWish(${i})">🔗</button>
+                    </div>
+                </div>
+            </div>
+        `).join('');
+    }
+
+    function toggleLike(idx) {
+        const items = getWishes();
+        if (items[idx]) {
+            items[idx].liked = !items[idx].liked;
+            saveWishes(items);
+            renderWishes();
+        }
+    }
+
+    function copyWish(idx) {
+        const items = getWishes();
+        const text = items[idx]?.text || '';
+        if (text && navigator.clipboard) {
+            navigator.clipboard.writeText(text).then(() => {
+                showToast('Скопировано в буфер обмена ✨');
+            });
+        }
+    }
+
+    form?.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const textarea = document.getElementById('wishText');
+        const text = textarea?.value.trim();
+        
+        if (!text) {
+            showToast('Напиши что-нибудь сначала ❤️');
+            return;
+        }
+
+        const items = getWishes();
+        items.unshift({ 
+            text, 
+            liked: false,
+            date: new Date().toISOString() // для отладки
+        });
+        
+        saveWishes(items);
+        textarea.value = '';
+        renderWishes();
+        showToast('Пожелание добавлено — Кися будет тронута ❤️');
+    });
+
+    document.getElementById('clearWishes')?.addEventListener('click', () => {
+        if (confirm('Точно очистить все пожелания? 😢')) {
+            localStorage.removeItem('wishes');
+            renderWishes();
+            showToast('Список очищен');
+        }
+    });
+
+    // Инициализация
+    renderWishes();
+
+    // Toast функция (универсальная)
+    window.showToast = function(msg) {
+        let toast = document.getElementById('toast');
+        if (!toast) {
+            toast = document.createElement('div');
+            toast.id = 'toast';
+            toast.style.cssText = `
+                position:fixed; bottom:20px; left:50%; transform:translateX(-50%);
+                background:#ff6b9d; color:white; padding:12px 24px; border-radius:50px;
+                font-weight:bold; z-index:1000; box-shadow:0 4px 12px rgba(0,0,0,0.2);
+                opacity:0; transition:opacity 0.3s;
+            `;
+            document.body.appendChild(toast);
+        }
+        toast.innerText = msg;
+        toast.style.opacity = '1';
+        setTimeout(() => { toast.style.opacity = '0'; }, 2500);
+    };
+});
+</script>
+</body>
+</html>

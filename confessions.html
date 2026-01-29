@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Признания — Кися</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <ul>
+            <li><a href="index.html">Главная</a></li>
+            <li><a href="gallery.html">Фотогалерея</a></li>
+            <li><a href="wishes.html">Пожелания</a></li>
+            <li><a href="memories.html">Воспоминания</a></li>
+            <li><a href="games.html">Игры</a></li>
+            <li><a href="music.html">Музыка</a></li>
+            <li><a href="surprises.html">Сюрпризы</a></li>
+            <li><a href="confessions.html" class="active">Признания</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <div class="hero"><h2>Признания</h2><p>Тёплые слова для моей любимой)</p></div>
+        <h1 class="gradient-text">💌 Признания любви</h1> 
+
+        <div class="card">
+            <h3>Мои слова для тебя <span class="badge" id="confCount">0</span></h3>
+            <div id="confessionsList"></div>
+            <div style="text-align:center; margin-top:15px;">
+                <button class="btn btn-pink" onclick="promptAddConfession()">Добавить признание</button>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>Каждое признание — честно и от сердца ❤️</p>
+    </footer>
+
+    <script>
+        function renderConfessions(){
+            const list = document.getElementById('confessionsList');
+            const items = JSON.parse(localStorage.getItem('confessions')||'[]');
+            const count = document.getElementById('confCount'); if (count) count.innerText = items.length;
+            if (!items.length) { list.innerHTML = '<p style="text-align:center; color:rgba(255,255,255,0.6);">Здесь пока пусто — добавь тёплое слово</p>'; return; }
+            list.innerHTML = items.map((c,i)=>`<div class="confession-item" data-idx="${i}"><div style="display:flex; justify-content:space-between; align-items:center;"><div style="flex:1;">${escapeHtml(c.text)}</div><div style="display:flex; gap:8px;"><button class="btn btn-pink" onclick="toggleConfLike(${i})">${c.liked? '💖' : '🤍'}</button><button class="btn" onclick="deleteConf(${i})">✖</button></div></div></div>`).join('');
+        }
+
+        function escapeHtml(s){ return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+        function promptAddConfession(){
+            const text = prompt('Напиши признание для Киси:');
+            if (!text) return;
+            const items = JSON.parse(localStorage.getItem('confessions')||'[]');
+            items.unshift({ text, liked:false, created:Date.now() });
+            localStorage.setItem('confessions', JSON.stringify(items));
+            renderConfessions();
+            showToast('Признание добавлено ❤️');
+        }
+
+        function toggleConfLike(i){ const items = JSON.parse(localStorage.getItem('confessions')||'[]'); if (!items[i]) return; items[i].liked = !items[i].liked; localStorage.setItem('confessions', JSON.stringify(items)); renderConfessions(); }
+        function deleteConf(i){ const items = JSON.parse(localStorage.getItem('confessions')||'[]'); items.splice(i,1); localStorage.setItem('confessions', JSON.stringify(items)); renderConfessions(); }
+
+        document.addEventListener('DOMContentLoaded', renderConfessions);
+    </script>
+    <div id="toast" aria-live="polite"></div>
+    <div class="back-to-top" id="backToTop" role="button" aria-label="Наверх" tabindex="0">⬆</div>
+    <script>
+        (function(){
+            const btn = document.getElementById('backToTop');
+            window.addEventListener('scroll', ()=>{ if (window.scrollY > 200) btn.classList.add('visible'); else btn.classList.remove('visible'); });
+            btn.addEventListener('click', ()=> window.scrollTo({top:0, behavior:'smooth'}));
+            btn.addEventListener('keydown', (e)=>{ if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); window.scrollTo({top:0, behavior:'smooth'}); } });
+            // highlight active nav link
+            try{ document.querySelectorAll('.navbar a').forEach(a=>{ if (location.href.includes(a.href)) a.classList.add('active'); }); }catch(e){}
+        })();
+    </script>
+</body>
+</html>

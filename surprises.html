@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Сюрпризы — Кися</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <ul>
+            <li><a href="index.html">Главная</a></li>
+            <li><a href="gallery.html">Фотогалерея</a></li>
+            <li><a href="wishes.html">Пожелания</a></li>
+            <li><a href="memories.html">Воспоминания</a></li>
+            <li><a href="games.html">Игры</a></li>
+            <li><a href="music.html">Музыка</a></li>
+            <li><a href="surprises.html" class="active">Сюрпризы</a></li>
+            <li><a href="confessions.html">Признания</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <div class="hero"><h2>Сюрпризы</h2><p>Маленькие вещи с большими эмоциями</p></div>
+        <h1 class="gradient-text">🎁 Сюрпризы для моей Киси</h1> 
+
+        <div class="card">
+            <h3>Коробка-сюрприз</h3>
+            <div class="surprise-box" onclick="openSurprise()">
+                <div class="surprise-box-inner" id="boxInner">
+                    <div class="surprise-box-front">Нажми для сюрприза</div>
+                    <div class="surprise-box-back">Сюрприз! Ты — мое всё! ❤️</div>
+                </div>
+            </div>
+            <p style="text-align:center;">Поверни коробку — и увидишь секретное послание.</p>
+        </div>
+
+        <div class="card">
+            <h3>Интерактивная открытка</h3>
+            <div style="text-align:center;">
+                <button class="btn btn-purple" onclick="showPopup()">Открыть открытку</button>
+            </div>
+        </div>
+
+        <div class="card">
+            <h3>Секретный код</h3>
+            <p style="text-align:center;">Введи код, чтобы открыть особое сообщение и узнать ещё не много про свои подарки).</p>
+            <div style="display:flex; gap:8px; justify-content:center; margin-top:10px;">
+                <input id="secretCode" placeholder="Введите код" style="padding:10px; border-radius:8px; border:none;">
+                <button class="btn btn-green" onclick="trySecret()">Ввести</button>
+            </div>
+            <p id="secretResult" style="text-align:center; margin-top:10px; font-weight:bold;"></p>
+        </div>
+    </div>
+
+    <footer>
+        <p>Маленькие сюрпризы — большие эмоции ✨</p>
+    </footer>
+
+    <script>
+        function openSurprise() {
+            const inner = document.getElementById('boxInner');
+            inner.style.transform = 'rotateY(180deg)';
+            setTimeout(() => inner.style.transform = '', 3000);
+        }
+
+        function showPopup() {
+            alert('Кися, ты самая прекрасная! 🎉');
+        }
+
+        function trySecret(){
+            const code = (document.getElementById('secretCode') || {}).value || '';
+            const res = document.getElementById('secretResult');
+            if (code.trim().toLowerCase() === 'кися16' || code.trim() === '8413'){
+                res.innerText = 'У тебя целых 5 подароков, 1 - это этот сайт)), 2 - это множество подарков, 3 - что-то что ты любишь, 4 - ты скорее всего уже получила(тг премм), а 5 - должен был быть тортик, но я что-то придумаю(я это пишу 29, так что да, не подумай))))';
+                showConfetti(); for(let i=0;i<15;i++) createHeart(false);
+            } else {
+                res.innerText = 'Неправильный код — попробуй ещё 😊';
+            }
+        }
+    </script>
+    <div id="toast" aria-live="polite"></div>
+    <div class="back-to-top" id="backToTop" role="button" aria-label="Наверх" tabindex="0">⬆</div>
+    <script>
+        (function(){
+            const btn = document.getElementById('backToTop');
+            window.addEventListener('scroll', ()=>{ if (window.scrollY > 200) btn.classList.add('visible'); else btn.classList.remove('visible'); });
+            btn.addEventListener('click', ()=> window.scrollTo({top:0, behavior:'smooth'}));
+            btn.addEventListener('keydown', (e)=>{ if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); window.scrollTo({top:0, behavior:'smooth'}); } });
+            // highlight active nav link
+            try{ document.querySelectorAll('.navbar a').forEach(a=>{ if (location.href.includes(a.href)) a.classList.add('active'); }); }catch(e){}
+        })();
+    </script>
+</body>
+</html>
+    </script>
+</body>
+</html>

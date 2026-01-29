@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Фотогалерея — Кися</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <ul>
+            <li><a href="index.html">Главная</a></li>
+            <li><a href="gallery.html" class="active">Фотогалерея</a></li>
+            <li><a href="wishes.html">Пожелания</a></li>
+            <li><a href="memories.html">Воспоминания</a></li>
+            <li><a href="games.html">Игры</a></li>
+            <li><a href="music.html">Музыка</a></li>
+            <li><a href="surprises.html">Сюрпризы</a></li>
+            <li><a href="confessions.html">Признания</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <div class="hero"><h2>Фотогалерея</h2><p>Коллекция наших самых тёплых моментов</p></div>
+        <h1 class="gradient-text">📸 Фотки нашей истории</h1>
+        <p style="text-align:center; margin-bottom:20px;">Нажми на фото, чтобы посмотреть крупно и вспомнить момент :)</p>
+
+        <div class="gallery" id="mainGallery">
+            <!-- Используются внешние изображения-заглушки; замени на свои фото -->
+            <div class="photo-item" data-src="img/ph1.jpg"><img src="img/ph1.jpg" alt="photo"></div>
+            <div class="photo-item" data-src="img/ph2.jpg"><img src="img/ph2.jpg" alt="photo"></div>
+            <div class="photo-item" data-src="img/ph3.jpg"><img src="img/ph3.jpg" alt="photo"></div>
+            <div class="photo-item" data-src="img/ph4.jpg"><img src="img/ph4.jpg" alt="photo"></div>
+            <div class="photo-item" data-src="img/ph5.jpg"><img src="img/ph5.jpg" alt="photo"></div>
+            <div class="photo-item" data-src="img/ph6.jpg"><img src="img/ph6.jpg" alt="photo"></div>
+            <div class="photo-item" data-src="img/ph7.jpg"><img src="img/ph7.jpg" alt="photo"></div>
+            <div class="photo-item" data-src="img/ph8.jpg"><img src="img/ph8.jpg" alt="photo"></div>
+            <div class="photo-item" data-src="img/ph9.jpg"><img src="img/ph9.jpg" alt="photo"></div>
+            <div class="photo-item" data-src="img/ph10.jpg"><img src="img/ph10.jpg" alt="photo"></div>
+            <div class="photo-item" data-src="img/ph11.jpg"><img src="img/ph11.jpg" alt="photo"></div>
+            <div class="photo-item" data-src="img/ph12.jpg"><img src="img/ph12.jpg" alt="photo"></div>
+            <div class="photo-item" data-src="img/ph13.jpg"><img src="img/ph13.jpg" alt="photo"></div>
+            <div class="photo-item" data-src="img/ph14.jpg"><img src="img/ph14.jpg" alt="photo"></div>
+            <div class="photo-item" data-src="img/ph15.jpg"><img src="img/ph15.jpg" alt="photo"></div>
+            <div class="photo-item" data-src="img/ph16.jpg"><img src="img/ph16.jpg" alt="photo"></div>
+            <div class="photo-item" data-src="img/ph17.jpg"><img src="img/ph17.jpg" alt="photo"></div>
+            <div class="photo-item" data-src="img/ph18.jpg"><img src="img/ph18.jpg" alt="photo"></div>
+        </div>
+
+        <div style="text-align:center; margin-top:12px;">
+            <button class="btn btn-pink" id="startSlideshow">Начать слайдшоу</button>
+            <button class="btn" id="prevPhoto">←</button>
+            <button class="btn" id="nextPhoto">→</button>
+            <span class="badge" id="photoCounter">0 / 0</span>
+        </div>
+
+        <div class="modal" id="imageModal">
+            <div class="modal-content">
+                <span class="modal-close" onclick="closeModal()">✖</span>
+                <img id="modalImg" src="" alt="photo" style="width:100%; border-radius:12px;">
+                <p id="modalCaption" style="text-align:center; margin-top:15px; font-weight:bold;">Кися, помни этот день? ❤️</p>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>С любовью, твой котёнок❤️ | Фотки специально для тебя)</p>
+    </footer>
+
+    <script>
+        (function(){
+            const items = Array.from(document.querySelectorAll('#mainGallery .photo-item'));
+            let current = 0;
+            const modal = document.getElementById('imageModal');
+            const modalImg = document.getElementById('modalImg');
+            const counter = document.getElementById('photoCounter');
+            const caption = document.getElementById('modalCaption');
+            function updateCounter(){ counter.innerText = (current+1) + ' / ' + items.length; }
+            items.forEach((it, idx)=> it.addEventListener('click', ()=> openModalWithIndex(idx)));
+
+            function openModalWithIndex(idx){
+                current = idx;
+                modalImg.src = items[current].dataset.src;
+                caption.innerText = items[current].querySelector('img').alt || 'Особенный момент';
+                modal.classList.add('active');
+                updateCounter();
+            }
+
+            function closeModal(){ modal.classList.remove('active'); }
+            function nextPhoto(){ current = (current+1) % items.length; openModalWithIndex(current); }
+            function prevPhoto(){ current = (current-1+items.length) % items.length; openModalWithIndex(current); }
+
+            document.getElementById('nextPhoto').addEventListener('click', ()=> { if(!modal.classList.contains('active')) openModalWithIndex((current+1)%items.length); else nextPhoto(); });
+            document.getElementById('prevPhoto').addEventListener('click', ()=> { if(!modal.classList.contains('active')) openModalWithIndex((current-1+items.length)%items.length); else prevPhoto(); });
+
+            document.getElementById('startSlideshow').addEventListener('click', function(){
+                const btn = this; if (btn.dataset.playing) { stop(); btn.dataset.playing=''; btn.innerText='Начать слайдшоу'; return; }
+                btn.dataset.playing='1'; btn.innerText='Остановить';
+                let sid = setInterval(()=>{ current=(current+1)%items.length; openModalWithIndex(current); }, 2100);
+                btn._sid = sid;
+                function stop(){ clearInterval(btn._sid); btn._sid=null; }
+                btn.stop = stop;
+            });
+
+            // Close modal on outside click or ESC
+            modal.addEventListener('click', (e)=>{ if (e.target === modal) closeModal(); });
+            document.addEventListener('keydown', (e)=>{
+                if (!modal.classList.contains('active')) return;
+                if (e.key === 'ArrowRight') nextPhoto();
+                if (e.key === 'ArrowLeft') prevPhoto();
+                if (e.key === 'Escape') closeModal();
+            });
+
+            // init counter
+            updateCounter();
+        })();
+    </script>
+    <div id="toast" aria-live="polite"></div>
+    <div class="back-to-top" id="backToTop" role="button" aria-label="Наверх" tabindex="0">⬆</div>
+    <script>
+        (function(){
+            const btn = document.getElementById('backToTop');
+            window.addEventListener('scroll', ()=>{ if (window.scrollY > 200) btn.classList.add('visible'); else btn.classList.remove('visible'); });
+            btn.addEventListener('click', ()=> window.scrollTo({top:0, behavior:'smooth'}));
+            btn.addEventListener('keydown', (e)=>{ if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); window.scrollTo({top:0, behavior:'smooth'}); } });
+            // highlight active nav link
+            try{ document.querySelectorAll('.navbar a').forEach(a=>{ if (location.href.includes(a.href)) a.classList.add('active'); }); }catch(e){}
+        })();
+    </script>
+</body>
+</html>

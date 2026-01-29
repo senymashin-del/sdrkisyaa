@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Сайт-поздравление для моей любимой Киси — множество анимаций, игр и вспоминаний.">
+    <title>С Днём Рождения, Кися! ❤️</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body data-birthday="02-01">
+    <!-- Навигация -->
+    <nav class="navbar">
+        <ul>
+            <li><a href="index.html">Главная</a></li>
+            <li><a href="gallery.html">Фотогалерея</a></li>
+            <li><a href="wishes.html">Пожелания</a></li>
+            <li><a href="memories.html">Воспоминания</a></li>
+            <li><a href="games.html">Игры</a></li>
+            <li><a href="music.html">Музыка</a></li>
+            <li><a href="surprises.html">Сюрпризы</a></li>
+            <li><a href="confessions.html">Признания</a></li>
+        </ul>
+    </nav>
+
+    <!-- Главный контейнер -->
+    <div class="container">
+        <!-- Заголовок -->
+        <h1 class="pulsing">🎉 С Днём Рождения, моя любимая Женаа! 🎉</h1>
+        <p class="typing-text subtitle" id="subtitle">Ты — моё солнышко, моя радость и моё всё...</p>
+        <div style="text-align:center; margin-top:12px;">
+            <button class="btn btn-pink" onclick="openSurpriseModal()">Открыть сюрприз 🎁</button>
+            <input id="quickWish" placeholder="Можна написать пожелание..." style="padding:8px 10px; border-radius:10px; border:none; width:220px; margin-left:10px;">
+            <button class="btn btn-green" onclick="saveQuickWish()" style="margin-left:8px;">Отправить</button>
+        </div>
+        
+        <!-- Основная карточка -->
+        <div class="card animated-border">
+            <h2>🎂 Тебе сегодня 16! 🎂</h2>
+            <p style="font-size: 24px; text-align: center; line-height: 1.8;">
+                Моя родная, любимая, самая прекрасная Кися!<br>
+                Сегодня твой особенный день, и я хочу поздравить тебя от всей души!<br><br>
+                
+                <span class="gradient-text">16 лет — это начало самого прекрасного периода жизни!</span><br>
+                Ты становишься всё красивее, умнее и прекраснее с каждым днём!<br><br>
+                
+                Желаю тебе море счастья, океан любви (только мне), горы удачи и небо мечтаний!<br>
+                Пусть каждый день приносит тебе радость и улыбки!<br><br>
+                
+                <strong>Ты — моя жизнь, моя любовь, моя Роднулька)))! ❤️</strong>
+            </p>
+        </div>
+
+        <!-- Специальное сообщение -->
+        <div class="card" style="background: linear-gradient(135deg, #ffeaa7, #fdcb6e);">
+            <h3>💌 Особенное послание от меня:</h3>
+            <p style="font-size: 20px; line-height: 1.8; text-align: center;">
+                Любимая, ты — мое счастье, моя кошка)), моя жизнь!<br>
+                С тобой каждый день как праздник, каждая минута как подарок!<br><br>
+                
+                Ты делаешь меня лучше, сильнее, счастливее!<br>
+                Твоя улыбка — моя самая любимая!<br><br>
+                
+                Обещаю всегда быть рядом, поддерживать тебя во всём и любить бесконечно!<br>
+                Ты — моя единственная и неповторимая! 🌹
+            </p>
+        </div>
+
+        <!-- Анимированные элементы -->
+        <div style="text-align: center; margin: 40px 0;">
+            <div class="floating" style="font-size: 60px;">🎈</div>
+            <div class="floating" style="font-size: 50px; margin-left: 100px; animation-delay: 0.5s;">🎁</div>
+            <div class="floating" style="font-size: 55px; margin-left: 200px; animation-delay: 1s;">🎂</div>
+        </div>
+
+        <!-- Таймер до следующего дня рождения -->
+        <div class="card">
+            <h3>⏳ До твоего следующего дня рождения:</h3>
+            <div id="countdown" style="font-size: 36px; text-align: center; font-weight: bold; color: #ff2d95;"></div> 
+        </div>
+
+        <!-- Интерактивная зона -->
+        <div class="card" style="background: linear-gradient(135deg, #a64ca6, #b663ff); color: white;">
+            <h3 style="color: white;">✨ Интерактивная зона</h3>
+            <p style="text-align: center; font-size: 20px;">
+                Нажми на меня, и я скажу тебе что-то особенное! 👇
+            </p>
+            <div style="text-align: center; margin-top: 20px;">
+                <button class="btn btn-purple" onclick="showSpecialMessage()">Послушать признание</button>
+            </div>
+
+            <div class="activity-grid" style="margin-top:30px; display:grid; grid-template-columns: repeat(auto-fit,minmax(260px,1fr)); gap:20px;">
+                <div class="card activity-card" id="quizCard">
+                    <h4>Викторина о нас</h4>
+                    <div class="quiz">
+                        <div class="q" data-idx="0">Где мы познакомились?<br><input type="text" id="q0" placeholder="Твой ответ"></div>
+                        <div class="q" data-idx="1">Где мы впервый раз поцеловались?<br><input type="text" id="q1" placeholder="Твой ответ"></div>
+                        <div class="q" data-idx="2">Наш самый любимый мем?<br><input type="text" id="q2" placeholder="Твой ответ"></div>
+                        <div class="q" data-idx="3">Где мы любим проводить время?<br><input type="text" id="q3" placeholder="Твой ответ"></div>
+                        <div class="q" data-idx="4">Что мы часто делаем у меня дома?<br><input type="text" id="q4" placeholder="Твой ответ"></div>
+                        <div class="q" data-idx="5">Под какого исполнителя мы играли в нашу самую первую игру?<br><input type="text" id="q5" placeholder="Твой ответ"></div>
+                        <div class="q" data-idx="6">Куда мы чаще всего ездим вместе?<br><input type="text" id="q6" placeholder="Твой ответ"></div>
+                        <div class="q" data-idx="7">Где мы любим больше всего гулять?<br><input type="text" id="q7" placeholder="Твой ответ"></div>
+                        <div class="q" data-idx="8">Наш самый любимый ресторан?<br><input type="text" id="q8" placeholder="Твой ответ"></div>
+                        <div class="q" data-idx="9">Наша самая любимая игра(именно игра)?<br><input type="text" id="q9" placeholder="Твой ответ"></div>
+                        <div style="text-align:center; margin-top:10px;">
+                            <button class="btn btn-green" onclick="submitQuiz()">Проверить</button>
+                        </div>
+                        <p id="quizResult" style="text-align:center; margin-top:8px; font-weight:bold;"></p>
+                    </div>
+                </div>
+
+                <div class="card activity-card" id="drawCard">
+                    <h4>Рисунки для любимой</h4>
+                    <canvas id="drawCanvas" width="300" height="200" class="canvas-draw"></canvas>
+                    <div style="text-align:center; margin-top:10px;">
+                        <button class="btn btn-pink" onclick="clearCanvas()">Очистить</button>
+                        <button class="btn btn-purple" onclick="downloadCanvas()" style="margin-left:8px;">Сохранить</button>
+                    </div>
+                </div>
+
+                <div class="card activity-card" id="loveCard">
+                    <h4>Love Meter</h4>
+                    <p>Потяни ползунок, чтобы измерить любовь 💗</p>
+                    <div class="love-meter">
+                        <input type="range" id="loveRange" min="0" max="100" value="75" oninput="updateLoveValue(this.value)">
+                        <div id="loveValue" style="font-weight:bold; text-align:center; margin-top:8px;">75%</div>
+                        <div style="text-align:center; margin-top:10px;"><button class="btn btn-green" onclick="revealLove()">Узнать результат</button></div>
+                        <p id="loveResult" style="text-align:center; margin-top:10px; font-weight:bold;"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Цитата дня -->
+        <div class="card" style="border-left: 10px solid #ff66b2;">
+            <h3>💭 Цитата для тебя сегодня:</h3>
+            <p style="font-size: 22px; font-style: italic; text-align: center; color: #ff66b2;">
+                "Любовь — это не то, что говорят. Любовь — это то, что делают."
+            </p>
+        </div>
+    </div>
+
+    <div class="modal" id="surpriseModal">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closeSurpriseModal()">✖</span>
+            <h2 class="gradient-text">Сюрприз для Киси 🎁</h2>
+            <p style="text-align:center; font-size:18px;">Кися, нажми на кнопку — я тебя очень люблю!</p>
+            <div style="text-align:center; margin-top:20px;">
+                <button class="btn btn-pink" onclick="runSurprise()">Подарок!</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="toast" aria-live="polite"></div>
+
+    <footer>
+        <p>С любовью, твой котёнок❤️ | Сделано специально для тебя, Кися!</p>
+    </footer>
+
+    <script>
+
+        function createConfetti() {
+            const confetti = document.createElement('div');
+            confetti.className = 'confetti';
+            confetti.style.left = (50 + (Math.random() - 0.5) * 40) + 'vw';
+            confetti.style.top = (40 + Math.random() * 20) + 'vh';
+            confetti.style.backgroundColor = getRandomColor();
+            confetti.style.animationDuration = (Math.random() * 2 + 2) + 's';
+            document.body.appendChild(confetti);
+            setTimeout(() => confetti.remove(), 5000);
+        }
+
+        function getRandomColor() {
+            const colors = ['#ff2d95', '#ff8fcf', '#a64ca6', '#b663ff', '#ff66b2', '#ffd6ee'];
+            return colors[Math.floor(Math.random() * colors.length)];
+        }
+
+        // Функция для фейерверка — burst с короткими follow-up волнами
+        function showConfetti() {
+            playPop();
+            for (let i = 0; i < 120; i++) createConfetti();
+            [300, 600, 1000].forEach((delay, idx) => setTimeout(()=>{ for (let i=0;i<30;i++) createConfetti(); playPop(); }, delay));
+        }
+
+        // Сердечки — burst + короткий дождь
+        function showHearts() {
+            playPop();
+            for (let i = 0; i < 20; i++) createHeart(false);
+            const t = setInterval(()=> { createHeart(true); playPop(); }, 200);
+            setTimeout(()=> clearInterval(t), 3000);
+        }
+
+        function createHeart(fall=true) {
+            const heart = document.createElement('div');
+            heart.className = 'heart' + (fall ? ' heart-fall' : '');
+            heart.innerHTML = '❤️';
+            if (fall) {
+                heart.style.left = (10 + Math.random() * 80) + 'vw';
+            } else {
+                heart.style.left = (20 + Math.random()*60) + 'vw';
+                heart.style.top = (40 + Math.random()*30) + 'vh';
+            }
+            heart.style.opacity = 0.95;
+            document.body.appendChild(heart);
+            setTimeout(() => heart.remove(), 5000);
+        }
+
+        // Звук и модал/всплывашки
+        function playPop() {
+            try {
+                const ctx = window._audioCtx || (window._audioCtx = new (window.AudioContext || window.webkitAudioContext)());
+                const o = ctx.createOscillator();
+                const g = ctx.createGain();
+                o.type = 'sine';
+                o.frequency.setValueAtTime(700 + Math.random()*500, ctx.currentTime);
+                g.gain.setValueAtTime(0.0001, ctx.currentTime);
+                g.gain.exponentialRampToValueAtTime(0.2, ctx.currentTime + 0.01);
+                g.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + 0.35);
+                o.connect(g); g.connect(ctx.destination);
+                o.start(); o.stop(ctx.currentTime + 0.36);
+            } catch(e) { /* audio may be blocked until user interacts */ }
+        }
+
+        function openSurpriseModal() {
+            document.getElementById('surpriseModal').classList.add('active');
+        }
+
+        function closeSurpriseModal() {
+            document.getElementById('surpriseModal').classList.remove('active');
+        }
+
+        function runSurprise() {
+            showConfetti(); showHearts(); playPop(); closeSurpriseModal(); showToast('Сюрприз отправлен! ❤️');
+        }
+
+        function saveQuickWish() {
+            const el = document.getElementById('quickWish');
+            if (!el) return;
+            const text = el.value.trim();
+            if (!text) { showToast('Пустое пожелание не сохранено'); return; }
+            const arr = JSON.parse(localStorage.getItem('wishes') || '[]');
+            arr.unshift(text);
+            if (arr.length > 50) arr.pop();
+            localStorage.setItem('wishes', JSON.stringify(arr));
+            el.value = '';
+            showToast('Пожелание сохранено! ❤️');
+        }
+
+        function showToast(msg) {
+            const t = document.getElementById('toast');
+            if (!t) return;
+            t.innerText = msg;
+            t.classList.add('visible');
+            setTimeout(()=> t.classList.remove('visible'), 3000);
+        }
+
+        // Функция для особенного сообщения
+        function showSpecialMessage() {
+            const messages = [
+                'Кися, ты — моя самая большая любовь! ❤️',
+                'Ты делаешь меня самым счастливым человеком на свете! 🌟',
+                'Я люблю тебя больше, чем могу выразить словами! 💝',
+                'Ты — моя мечта, которая стала реальностью! ✨',
+                'С тобой я готов на всё, моя родная! 🌹',
+                'Ты — единственная, кого я хочу видеть рядом всегда! 💕',
+                'Моё сердце принадлежит только тебе, Кися! 💓',
+                'Ты — моя жизнь, моя любовь, моя вселенная! 🌍'
+            ];
+            
+            const randomMessage = messages[Math.floor(Math.random() * messages.length)];
+            alert(randomMessage);
+        }
+
+        // ===== Викторина =====
+        function submitQuiz() {
+    const correctAnswers = [
+        'Дайвинчик',
+        'Кфс',
+        'Помидор',
+        'Дома',
+        'Играем',
+        'Гостмэйн',
+        'Аграрный',
+        'Гармония',
+        'Вкусно и точка',
+        'Бравл старс'
+    ];
+    
+    const userAnswers = [];
+    for (let i = 0; i < 10; i++) {
+        const input = document.getElementById(`q${i}`);
+        userAnswers.push(input ? input.value.trim().toLowerCase() : '');
+    }
+    
+    let correctCount = 0;
+    for (let i = 0; i < 10; i++) {
+        if (userAnswers[i] === correctAnswers[i].toLowerCase()) {
+            correctCount++;
+        }
+    }
+    
+    const out = document.getElementById('quizResult');
+    
+    if (correctCount >= 10) {
+        out.innerText = 'Отлично! Ты хорошо помнишь наши моменты ❤️';
+        showConfetti(); 
+        setTimeout(()=>{ for(let i=0;i<8;i++) createHeart(false); }, 300);
+    } else if (correctCount >= 5) {
+        out.innerText = `Хорошо! ${correctCount} из 10 ответов правильные. Почти все верно! 💪`;
+    } else if (correctCount >= 3) {
+        out.innerText = `Уже близко! ${correctCount} из 10. Попробуй ещё разок 🌟`;
+    } else {
+        out.innerText = `Только ${correctCount} из 10... Давай, вспоминай лучше! 😊`;
+    }
+}
+        
+
+        // ===== Холст для рисования =====
+        (function setupCanvas(){
+            const canvas = document.getElementById('drawCanvas');
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+            ctx.lineCap = 'round';
+            ctx.lineJoin = 'round';
+            ctx.strokeStyle = '#ff2d95';
+            ctx.lineWidth = 4;
+            let drawing = false;
+            let last = null;
+
+            function pos(e){
+                if (e.touches && e.touches[0]) e = e.touches[0];
+                const r = canvas.getBoundingClientRect();
+                return {x: e.clientX - r.left, y: e.clientY - r.top};
+            }
+
+            canvas.addEventListener('pointerdown', (e)=>{ drawing=true; last = pos(e); });
+            canvas.addEventListener('pointermove', (e)=>{ if (!drawing) return; const p = pos(e); ctx.beginPath(); ctx.moveTo(last.x,last.y); ctx.lineTo(p.x,p.y); ctx.stroke(); last = p; });
+            canvas.addEventListener('pointerup', ()=>{ drawing=false; last=null; });
+            canvas.addEventListener('pointerleave', ()=>{ drawing=false; last=null; });
+
+            window.clearCanvas = function(){ ctx.clearRect(0,0,canvas.width,canvas.height); };
+            window.downloadCanvas = function(){ const link = document.createElement('a'); link.href = canvas.toDataURL('image/png'); link.download = 'kiss_for_kisi.png'; link.click(); };
+        })();
+
+        // ===== Love Meter =====
+        function updateLoveValue(val){
+            const el = document.getElementById('loveValue'); if (el) el.innerText = Math.round(val) + '%';
+        }
+
+        function revealLove(){
+            const v = parseInt((document.getElementById('loveRange') || {}).value || 0,10);
+            const out = document.getElementById('loveResult');
+            if (!out) return;
+            let msg = '';
+            if (v > 90) msg = 'Бесконечная любовь! Я твой навсегда! 💞';
+            else if (v > 70) msg = 'Много любви — целую бесконечно! 💗';
+            else if (v > 40) msg = 'Сердце полно тепла — ты мне дорога! 💕';
+            else msg = 'Любовь растёт — ещё немного и будет идеально! 🌱';
+            out.innerText = msg;
+            if (v > 40) { showConfetti(); for(let i=0;i<6;i++) createHeart(false); }
+        }
+
+        // Таймер обратного отсчета (если в теге body указать data-birthday="MM-DD", он будет использовать её)
+        let birthdayTriggered = false;
+        function updateCountdown() {
+            const now = new Date();
+            const bd = document.body.getAttribute('data-birthday'); // формат MM-DD
+            let target;
+            if (bd) {
+                const parts = bd.split('-').map(n => parseInt(n, 10));
+                if (parts.length === 2 && !isNaN(parts[0]) && !isNaN(parts[1])) {
+                    const [m, d] = parts;
+                    target = new Date(now.getFullYear(), m - 1, d);
+                    if (target <= now) target.setFullYear(now.getFullYear() + 1);
+                }
+            }
+            if (!target) {
+                // запасной вариант — через 365 дней
+                target = new Date(now.getTime() + 365 * 24 * 60 * 60 * 1000);
+            }
+
+            const diff = target - now;
+            if (diff <= 0) {
+                document.getElementById('countdown').innerHTML = 'С днём рождения! ❤️';
+                if (!birthdayTriggered) {
+                    birthdayTriggered = true;
+                    // Короткая задержка, затем запускаем эффекты и меняем заголовок
+                    setTimeout(()=>{ showConfetti(); showHearts(); document.title = 'С Днём Рождения, Кися! 🎉'; }, 500);
+                }
+                return;
+            }
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+            
+            document.getElementById('countdown').innerHTML = 
+                `${days} дней ${hours} часов ${minutes} минут ${seconds} секунд`;
+        }
+
+        // Запуск таймера
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+
+        // Создание снежинок (эффект праздника)
+        function createSnow() {
+            for (let i = 0; i < 50; i++) {
+                const snow = document.createElement('div');
+                snow.className = 'snow';
+                snow.style.left = Math.random() * 100 + 'vw';
+                snow.style.animationDuration = (Math.random() * 5 + 5) + 's';
+                snow.style.opacity = Math.random();
+                snow.style.width = (Math.random() * 10 + 5) + 'px';
+                snow.style.height = snow.style.width;
+                document.body.appendChild(snow);
+            }
+        }
+
+        createSnow();
+    </script>
+</body>
+</html>

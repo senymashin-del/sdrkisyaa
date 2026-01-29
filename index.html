@@ -2,15 +2,18 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="description" content="Сайт-поздравление для моей любимой Киси — множество анимаций, игр и вспоминаний.">
     <title>С Днём Рождения, Кися! ❤️</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body data-birthday="02-01">
+    <!-- Бургер-меню для мобильных -->
+    <button class="hamburger-menu" onclick="toggleMenu()">☰</button>
+
     <!-- Навигация -->
     <nav class="navbar">
-        <ul>
+        <ul id="navMenu">
             <li><a href="index.html">Главная</a></li>
             <li><a href="gallery.html">Фотогалерея</a></li>
             <li><a href="wishes.html">Пожелания</a></li>
@@ -29,14 +32,16 @@
         <p class="typing-text subtitle" id="subtitle">Ты — моё солнышко, моя радость и моё всё...</p>
         <div style="text-align:center; margin-top:12px;">
             <button class="btn btn-pink" onclick="openSurpriseModal()">Открыть сюрприз 🎁</button>
-            <input id="quickWish" placeholder="Можна написать пожелание..." style="padding:8px 10px; border-radius:10px; border:none; width:220px; margin-left:10px;">
-            <button class="btn btn-green" onclick="saveQuickWish()" style="margin-left:8px;">Отправить</button>
+            <div style="margin-top:10px;">
+                <input id="quickWish" placeholder="Можна написать пожелание..." style="padding:12px; border-radius:10px; border:2px solid #ff2d95; width:100%; font-size:16px; margin-top:10px;">
+                <button class="btn btn-green" onclick="saveQuickWish()" style="margin-top:10px;">Отправить</button>
+            </div>
         </div>
         
         <!-- Основная карточка -->
         <div class="card animated-border">
             <h2>🎂 Тебе сегодня 16! 🎂</h2>
-            <p style="font-size: 24px; text-align: center; line-height: 1.8;">
+            <p style="font-size: 18px; text-align: center; line-height: 1.8;">
                 Моя родная, любимая, самая прекрасная Кися!<br>
                 Сегодня твой особенный день, и я хочу поздравить тебя от всей души!<br><br>
                 
@@ -53,7 +58,7 @@
         <!-- Специальное сообщение -->
         <div class="card" style="background: linear-gradient(135deg, #ffeaa7, #fdcb6e);">
             <h3>💌 Особенное послание от меня:</h3>
-            <p style="font-size: 20px; line-height: 1.8; text-align: center;">
+            <p style="font-size: 16px; line-height: 1.8; text-align: center;">
                 Любимая, ты — мое счастье, моя кошка)), моя жизнь!<br>
                 С тобой каждый день как праздник, каждая минута как подарок!<br><br>
                 
@@ -88,7 +93,7 @@
                 <button class="btn btn-purple" onclick="showSpecialMessage()">Послушать признание</button>
             </div>
 
-            <div class="activity-grid" style="margin-top:30px; display:grid; grid-template-columns: repeat(auto-fit,minmax(260px,1fr)); gap:20px;">
+            <div class="activity-grid">
                 <div class="card activity-card" id="quizCard">
                     <h4>Викторина о нас</h4>
                     <div class="quiz">
@@ -140,6 +145,7 @@
         </div>
     </div>
 
+    <!-- Модальное окно сюрприза -->
     <div class="modal" id="surpriseModal">
         <div class="modal-content">
             <span class="modal-close" onclick="closeSurpriseModal()">✖</span>
@@ -151,14 +157,26 @@
         </div>
     </div>
 
+    <!-- Toast уведомление -->
     <div id="toast" aria-live="polite"></div>
 
+    <!-- Footer -->
     <footer>
         <p>С любовью, твой котёнок❤️ | Сделано специально для тебя, Кися!</p>
     </footer>
 
-    <script>
+    <!-- Back to top button -->
+    <div class="back-to-top" id="backToTop" role="button" aria-label="Наверх" tabindex="0">⬆</div>
 
+    <!-- JavaScript -->
+    <script>
+        // Бургер-меню
+        function toggleMenu() {
+            const menu = document.getElementById('navMenu');
+            menu.classList.toggle('active');
+        }
+
+        // Конфетти
         function createConfetti() {
             const confetti = document.createElement('div');
             confetti.className = 'confetti';
@@ -175,14 +193,13 @@
             return colors[Math.floor(Math.random() * colors.length)];
         }
 
-        // Функция для фейерверка — burst с короткими follow-up волнами
         function showConfetti() {
             playPop();
             for (let i = 0; i < 120; i++) createConfetti();
             [300, 600, 1000].forEach((delay, idx) => setTimeout(()=>{ for (let i=0;i<30;i++) createConfetti(); playPop(); }, delay));
         }
 
-        // Сердечки — burst + короткий дождь
+        // Сердечки
         function showHearts() {
             playPop();
             for (let i = 0; i < 20; i++) createHeart(false);
@@ -205,7 +222,7 @@
             setTimeout(() => heart.remove(), 5000);
         }
 
-        // Звук и модал/всплывашки
+        // Звук
         function playPop() {
             try {
                 const ctx = window._audioCtx || (window._audioCtx = new (window.AudioContext || window.webkitAudioContext)());
@@ -221,6 +238,7 @@
             } catch(e) { /* audio may be blocked until user interacts */ }
         }
 
+        // Модальное окно
         function openSurpriseModal() {
             document.getElementById('surpriseModal').classList.add('active');
         }
@@ -233,6 +251,7 @@
             showConfetti(); showHearts(); playPop(); closeSurpriseModal(); showToast('Сюрприз отправлен! ❤️');
         }
 
+        // Быстрое пожелание
         function saveQuickWish() {
             const el = document.getElementById('quickWish');
             if (!el) return;
@@ -246,6 +265,7 @@
             showToast('Пожелание сохранено! ❤️');
         }
 
+        // Toast
         function showToast(msg) {
             const t = document.getElementById('toast');
             if (!t) return;
@@ -254,7 +274,7 @@
             setTimeout(()=> t.classList.remove('visible'), 3000);
         }
 
-        // Функция для особенного сообщения
+        // Особенное сообщение
         function showSpecialMessage() {
             const messages = [
                 'Кися, ты — моя самая большая любовь! ❤️',
@@ -271,51 +291,50 @@
             alert(randomMessage);
         }
 
-        // ===== Викторина =====
+        // Викторина
         function submitQuiz() {
-    const correctAnswers = [
-        'Дайвинчик',
-        'Кфс',
-        'Помидор',
-        'Дома',
-        'Играем',
-        'Гостмэйн',
-        'Аграрный',
-        'Гармония',
-        'Вкусно и точка',
-        'Бравл старс'
-    ];
-    
-    const userAnswers = [];
-    for (let i = 0; i < 10; i++) {
-        const input = document.getElementById(`q${i}`);
-        userAnswers.push(input ? input.value.trim().toLowerCase() : '');
-    }
-    
-    let correctCount = 0;
-    for (let i = 0; i < 10; i++) {
-        if (userAnswers[i] === correctAnswers[i].toLowerCase()) {
-            correctCount++;
+            const correctAnswers = [
+                'Дайвинчик',
+                'Кфс',
+                'Помидор',
+                'Дома',
+                'Играем',
+                'Гостмэйн',
+                'Аграрный',
+                'Гармония',
+                'Вкусно и точка',
+                'Бравл старс'
+            ];
+            
+            const userAnswers = [];
+            for (let i = 0; i < 10; i++) {
+                const input = document.getElementById(`q${i}`);
+                userAnswers.push(input ? input.value.trim().toLowerCase() : '');
+            }
+            
+            let correctCount = 0;
+            for (let i = 0; i < 10; i++) {
+                if (userAnswers[i] === correctAnswers[i].toLowerCase()) {
+                    correctCount++;
+                }
+            }
+            
+            const out = document.getElementById('quizResult');
+            
+            if (correctCount >= 10) {
+                out.innerText = 'Отлично! Ты хорошо помнишь наши моменты ❤️';
+                showConfetti(); 
+                setTimeout(()=>{ for(let i=0;i<8;i++) createHeart(false); }, 300);
+            } else if (correctCount >= 5) {
+                out.innerText = `Хорошо! ${correctCount} из 10 ответов правильные. Почти все верно! 💪`;
+            } else if (correctCount >= 3) {
+                out.innerText = `Уже близко! ${correctCount} из 10. Попробуй ещё разок 🌟`;
+            } else {
+                out.innerText = `Только ${correctCount} из 10... Давай, вспоминай лучше! 😊`;
+            }
         }
-    }
-    
-    const out = document.getElementById('quizResult');
-    
-    if (correctCount >= 10) {
-        out.innerText = 'Отлично! Ты хорошо помнишь наши моменты ❤️';
-        showConfetti(); 
-        setTimeout(()=>{ for(let i=0;i<8;i++) createHeart(false); }, 300);
-    } else if (correctCount >= 5) {
-        out.innerText = `Хорошо! ${correctCount} из 10 ответов правильные. Почти все верно! 💪`;
-    } else if (correctCount >= 3) {
-        out.innerText = `Уже близко! ${correctCount} из 10. Попробуй ещё разок 🌟`;
-    } else {
-        out.innerText = `Только ${correctCount} из 10... Давай, вспоминай лучше! 😊`;
-    }
-}
-        
 
-        // ===== Холст для рисования =====
+        // Холст для рисования
         (function setupCanvas(){
             const canvas = document.getElementById('drawCanvas');
             if (!canvas) return;
@@ -342,7 +361,7 @@
             window.downloadCanvas = function(){ const link = document.createElement('a'); link.href = canvas.toDataURL('image/png'); link.download = 'kiss_for_kisi.png'; link.click(); };
         })();
 
-        // ===== Love Meter =====
+        // Love Meter
         function updateLoveValue(val){
             const el = document.getElementById('loveValue'); if (el) el.innerText = Math.round(val) + '%';
         }
@@ -360,11 +379,11 @@
             if (v > 40) { showConfetti(); for(let i=0;i<6;i++) createHeart(false); }
         }
 
-        // Таймер обратного отсчета (если в теге body указать data-birthday="MM-DD", он будет использовать её)
+        // Таймер обратного отсчета
         let birthdayTriggered = false;
         function updateCountdown() {
             const now = new Date();
-            const bd = document.body.getAttribute('data-birthday'); // формат MM-DD
+            const bd = document.body.getAttribute('data-birthday');
             let target;
             if (bd) {
                 const parts = bd.split('-').map(n => parseInt(n, 10));
@@ -375,7 +394,6 @@
                 }
             }
             if (!target) {
-                // запасной вариант — через 365 дней
                 target = new Date(now.getTime() + 365 * 24 * 60 * 60 * 1000);
             }
 
@@ -384,7 +402,6 @@
                 document.getElementById('countdown').innerHTML = 'С днём рождения! ❤️';
                 if (!birthdayTriggered) {
                     birthdayTriggered = true;
-                    // Короткая задержка, затем запускаем эффекты и меняем заголовок
                     setTimeout(()=>{ showConfetti(); showHearts(); document.title = 'С Днём Рождения, Кися! 🎉'; }, 500);
                 }
                 return;
@@ -398,11 +415,10 @@
                 `${days} дней ${hours} часов ${minutes} минут ${seconds} секунд`;
         }
 
-        // Запуск таймера
         setInterval(updateCountdown, 1000);
         updateCountdown();
 
-        // Создание снежинок (эффект праздника)
+        // Снежинки
         function createSnow() {
             for (let i = 0; i < 50; i++) {
                 const snow = document.createElement('div');
@@ -415,8 +431,15 @@
                 document.body.appendChild(snow);
             }
         }
-
         createSnow();
+
+        // Back to top
+        (function(){
+            const btn = document.getElementById('backToTop');
+            window.addEventListener('scroll', ()=>{ if (window.scrollY > 200) btn.classList.add('visible'); else btn.classList.remove('visible'); });
+            btn.addEventListener('click', ()=> window.scrollTo({top:0, behavior:'smooth'}));
+            btn.addEventListener('keydown', (e)=>{ if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); window.scrollTo({top:0, behavior:'smooth'}); } });
+        })();
     </script>
 </body>
 </html>

@@ -6,45 +6,60 @@
     <meta name="description" content="Сайт-поздравление для моей любимой Киси — множество анимаций, игр и вспоминаний.">
     <title>С Днём Рождения, Кися! ❤️</title>
     <link rel="stylesheet" href="style.css">
+    <!-- Font Awesome для иконок -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body data-birthday="02-01">
     <!-- Звёзды на фоне -->
     <div class="stars" id="stars"></div>
 
-    <!-- Бургер-меню для мобильных -->
-    <button class="hamburger-menu" onclick="toggleMenu()">☰</button>
+    <!-- ХЭДЕР С БУРГЕР-МЕНЮ -->
+    <header class="header" id="header">
+        <!-- Бургер-меню для мобильных -->
+        <button class="hamburger-menu" id="hamburgerMenu" aria-label="Меню">
+            <span class="hamburger-icon"></span>
+            <span class="hamburger-icon"></span>
+            <span class="hamburger-icon"></span>
+        </button>
 
-    <!-- Навигация -->
-    <nav class="navbar">
-        <ul id="navMenu">
-            <li><a href="index.html">Главная</a></li>
-            <li><a href="gallery.html">Фотогалерея</a></li>
-            <li><a href="wishes.html">Пожелания</a></li>
-            <li><a href="memories.html">Воспоминания</a></li>
-            <li><a href="games.html">Игры</a></li>
-            <li><a href="music.html">Музыка</a></li>
-            <li><a href="surprises.html">Сюрпризы</a></li>
-            <li><a href="confessions.html">Признания</a></li>
-        </ul>
-    </nav>
+        <!-- Логотип/Заголовок -->
+        <div class="header-title">
+            <h1>🎂 Кися</h1>
+        </div>
+
+        <!-- Навигация -->
+        <nav class="navbar" id="navbar">
+            <ul id="navMenu">
+                <li><a href="index.html"><i class="fas fa-home"></i>Главная</a></li>
+                <li><a href="gallery.html"><i class="fas fa-images"></i>Фотогалерея</a></li>
+                <li><a href="wishes.html"><i class="fas fa-heart"></i>Пожелания</a></li>
+                <li><a href="memories.html"><i class="fas fa-book"></i>Воспоминания</a></li>
+                <li><a href="games.html"><i class="fas fa-gamepad"></i>Игры</a></li>
+                <li><a href="music.html"><i class="fas fa-music"></i>Музыка</a></li>
+                <li><a href="surprises.html"><i class="fas fa-gift"></i>Сюрпризы</a></li>
+                <li><a href="confessions.html"><i class="fas fa-comment-heart"></i>Признания</a></li>
+            </ul>
+        </nav>
+    </header>
 
     <!-- Главный контейнер -->
     <div class="container">
         <!-- Заголовок -->
-        <h1 class="pulsing">🎉 С Днём Рождения, моя любимая Женаа! 🎉</h1>
+        <h2 class="pulsing">🎉 С Днём Рождения, моя любимая Женаа! 🎉</h2>
         <p class="typing-text subtitle" id="subtitle">Ты — моё солнышко, моя радость и моё всё...</p>
+        
         <div style="text-align:center; margin-top:20px;">
-            <button class="btn btn-pink btn-glow" onclick="openSurpriseModal()">Открыть сюрприз 🎁</button>
+            <button class="btn btn-pink" onclick="openSurpriseModal()">Открыть сюрприз 🎁</button>
             <div style="margin-top:15px;">
-                <input id="quickWish" placeholder="Можна написать пожелание..." style="padding:14px; border-radius:12px; border:2px solid var(--primary); width:100%; font-size:16px; background:rgba(255,255,255,0.1); color:white; margin-top:12px;">
+                <input id="quickWish" placeholder="Можна написать пожелание..." style="padding:14px; border-radius:12px; border:2px solid #ff2d95; width:100%; font-size:16px; background:rgba(255,255,255,0.1); color:white; margin-top:12px;">
                 <button class="btn btn-green" onclick="saveQuickWish()" style="margin-top:12px;">Отправить</button>
             </div>
         </div>
         
         <!-- Основная карточка -->
-        <div class="card animated-border" style="--delay: 1;">
-            <h2>🎂 Тебе сегодня 16! 🎂</h2>
-            <p style="font-size: 19px; text-align: center; line-height: 1.8;">
+        <div class="card animated-border">
+            <h3>🎂 Тебе сегодня 16! 🎂</h3>
+            <p style="font-size: 18px; text-align: center; line-height: 1.8;">
                 Моя родная, любимая, самая прекрасная Кися!<br>
                 Сегодня твой особенный день, и я хочу поздравить тебя от всей души!<br><br>
                 
@@ -59,7 +74,7 @@
         </div>
 
         <!-- Специальное сообщение -->
-        <div class="card yellow-gradient" style="--delay: 2;">
+        <div class="card yellow-gradient">
             <h3>💌 Особенное послание от меня:</h3>
             <p style="font-size: 17px; line-height: 1.8; text-align: center;">
                 Любимая, ты — мое счастье, моя кошка)), моя жизнь!<br>
@@ -81,19 +96,19 @@
         </div>
 
         <!-- Таймер до следующего дня рождения -->
-        <div class="card" style="--delay: 3;">
+        <div class="card">
             <h3>⏳ До твоего следующего дня рождения:</h3>
-            <div id="countdown" style="font-size: 38px; text-align: center; font-weight: 700; color: var(--primary); text-shadow: 0 0 15px rgba(255, 45, 149, 0.5);"></div> 
+            <div id="countdown" style="font-size: 38px; text-align: center; font-weight: 700; color: #ff2d95; text-shadow: 0 0 15px rgba(255, 45, 149, 0.5);"></div> 
         </div>
 
         <!-- Интерактивная зона -->
-        <div class="card purple-gradient" style="--delay: 4;">
+        <div class="card purple-gradient">
             <h3 style="color: white;">✨ Интерактивная зона</h3>
             <p style="text-align: center; font-size: 20px; color: rgba(255,255,255,0.95);">
                 Нажми на меня, и я скажу тебе что-то особенное! 👇
             </p>
             <div style="text-align: center; margin-top: 25px;">
-                <button class="btn btn-purple btn-glow" onclick="showSpecialMessage()">Послушать признание</button>
+                <button class="btn btn-purple" onclick="showSpecialMessage()">Послушать признание</button>
             </div>
 
             <div class="activity-grid">
@@ -140,9 +155,9 @@
         </div>
 
         <!-- Цитата дня -->
-        <div class="card border-left" style="--delay: 5;">
+        <div class="card border-left">
             <h3>💭 Цитата для тебя сегодня:</h3>
-            <p style="font-size: 24px; font-style: italic; text-align: center; color: var(--secondary); font-family: 'Dancing Script', cursive;">
+            <p style="font-size: 24px; font-style: italic; text-align: center; color: #ff66b2;">
                 "Любовь — это не то, что говорят. Любовь — это то, что делают."
             </p>
         </div>
@@ -152,10 +167,10 @@
     <div class="modal" id="surpriseModal">
         <div class="modal-content">
             <span class="modal-close" onclick="closeSurpriseModal()">✖</span>
-            <h2 class="gradient-text">Сюрприз для Киси 🎁</h2>
+            <h3 class="gradient-text">Сюрприз для Киси 🎁</h3>
             <p style="text-align:center; font-size:19px; margin-top:15px;">Кися, нажми на кнопку — я тебя очень люблю!</p>
             <div style="text-align:center; margin-top:25px;">
-                <button class="btn btn-pink btn-glow" onclick="runSurprise()">Подарок!</button>
+                <button class="btn btn-pink" onclick="runSurprise()">Подарок!</button>
             </div>
         </div>
     </div>
@@ -173,9 +188,11 @@
 
     <!-- JavaScript -->
     <script>
-        // Создание звёзд на фоне
+        // ===== СОЗДАНИЕ ЗВЁЗД НА ФОНЕ =====
         function createStars() {
             const starsContainer = document.getElementById('stars');
+            if (!starsContainer) return;
+            
             for (let i = 0; i < 100; i++) {
                 const star = document.createElement('div');
                 star.className = 'star';
@@ -185,18 +202,84 @@
                 star.style.top = `${Math.random() * 100}%`;
                 star.style.setProperty('--duration', `${Math.random() * 3 + 2}s`);
                 star.style.setProperty('--delay', `${Math.random() * 2}s`);
+                star.style.opacity = `${Math.random() * 0.5 + 0.2}`;
                 starsContainer.appendChild(star);
             }
         }
         createStars();
 
-        // Бургер-меню
-        function toggleMenu() {
-            const menu = document.getElementById('navMenu');
-            menu.classList.toggle('active');
+        // ===== СКРЫТИЕ ХЭДЕРА ПРИ ПРОКРУТКЕ =====
+        const header = document.getElementById('header');
+        let lastScrollPosition = 0;
+        let ticking = false;
+
+        function updateHeaderPosition() {
+            const currentScrollPosition = window.pageYOffset;
+
+            // Если прокручиваем вниз - скрываем
+            if (currentScrollPosition > lastScrollPosition && currentScrollPosition > 100) {
+                header.classList.add('hidden');
+            } 
+            // Если прокручиваем вверх - показываем
+            else if (currentScrollPosition < lastScrollPosition || currentScrollPosition < 100) {
+                header.classList.remove('hidden');
+            }
+
+            lastScrollPosition = currentScrollPosition;
+            ticking = false;
         }
 
-        // Конфетти
+        window.addEventListener('scroll', () => {
+            if (!ticking) {
+                window.requestAnimationFrame(updateHeaderPosition);
+                ticking = true;
+            }
+        });
+
+        // ===== БУРГЕР-МЕНЮ =====
+        const hamburgerMenu = document.getElementById('hamburgerMenu');
+        const navMenu = document.getElementById('navMenu');
+
+        hamburgerMenu.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            hamburgerMenu.classList.toggle('active');
+        });
+
+        // Закрытие меню при клике на ссылку
+        document.querySelectorAll('#navMenu a').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+                hamburgerMenu.classList.remove('active');
+            });
+        });
+
+        // Закрытие меню при клике вне меню
+        document.addEventListener('click', (e) => {
+            if (navMenu.classList.contains('active') && 
+                !navMenu.contains(e.target) && 
+                !hamburgerMenu.contains(e.target)) {
+                navMenu.classList.remove('active');
+                hamburgerMenu.classList.remove('active');
+            }
+        });
+
+        // Закрытие меню при прокрутке на мобильных
+        window.addEventListener('scroll', () => {
+            if (window.innerWidth <= 768 && navMenu.classList.contains('active')) {
+                navMenu.classList.remove('active');
+                hamburgerMenu.classList.remove('active');
+            }
+        });
+
+        // Закрытие меню при изменении размера окна
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 768) {
+                navMenu.classList.remove('active');
+                hamburgerMenu.classList.remove('active');
+            }
+        });
+
+        // ===== КОНФЕТТИ =====
         function createConfetti() {
             const confetti = document.createElement('div');
             confetti.className = 'confetti';
@@ -219,7 +302,7 @@
             [300, 600, 1000].forEach((delay, idx) => setTimeout(()=>{ for (let i=0;i<40;i++) createConfetti(); playPop(); }, delay));
         }
 
-        // Сердечки
+        // ===== СЕРДЕЧКИ =====
         function showHearts() {
             playPop();
             for (let i = 0; i < 25; i++) createHeart(false);
@@ -242,7 +325,7 @@
             setTimeout(() => heart.remove(), 5500);
         }
 
-        // Звук
+        // ===== ЗВУК =====
         function playPop() {
             try {
                 const ctx = window._audioCtx || (window._audioCtx = new (window.AudioContext || window.webkitAudioContext)());
@@ -258,7 +341,7 @@
             } catch(e) {}
         }
 
-        // Модальное окно
+        // ===== МОДАЛЬНОЕ ОКНО =====
         function openSurpriseModal() {
             document.getElementById('surpriseModal').classList.add('active');
         }
@@ -271,7 +354,7 @@
             showConfetti(); showHearts(); playPop(); closeSurpriseModal(); showToast('Сюрприз отправлен! ❤️');
         }
 
-        // Быстрое пожелание
+        // ===== БЫСТРОЕ ПОЖЕЛАНИЕ =====
         function saveQuickWish() {
             const el = document.getElementById('quickWish');
             if (!el) return;
@@ -285,7 +368,7 @@
             showToast('Пожелание сохранено! ❤️');
         }
 
-        // Toast
+        // ===== TOAST =====
         function showToast(msg) {
             const t = document.getElementById('toast');
             if (!t) return;
@@ -294,7 +377,7 @@
             setTimeout(()=> t.classList.remove('visible'), 3200);
         }
 
-        // Особенное сообщение
+        // ===== ОСОБЕННОЕ СООБЩЕНИЕ =====
         function showSpecialMessage() {
             const messages = [
                 'Кися, ты — моя самая большая любовь! ❤️',
@@ -313,7 +396,7 @@
             showToast(randomMessage);
         }
 
-        // Викторина
+        // ===== ВИКТОРИНА =====
         function submitQuiz() {
             const correctAnswers = [
                 'Дайвинчик',
@@ -363,7 +446,7 @@
             }
         }
 
-        // Холст для рисования
+        // ===== ХОЛСТ ДЛЯ РИСОВАНИЯ =====
         (function setupCanvas(){
             const canvas = document.getElementById('drawCanvas');
             if (!canvas) return;
@@ -390,7 +473,7 @@
             window.downloadCanvas = function(){ const link = document.createElement('a'); link.href = canvas.toDataURL('image/png'); link.download = 'drawing_for_kisi.png'; link.click(); };
         })();
 
-        // Love Meter
+        // ===== LOVE METER =====
         function updateLoveValue(val){
             const el = document.getElementById('loveValue'); if (el) el.innerText = Math.round(val) + '%';
         }
@@ -423,7 +506,7 @@
             }
         }
 
-        // Таймер обратного отсчета
+        // ===== ТАЙМЕР ОБРАТНОГО ОТСЧЁТА =====
         let birthdayTriggered = false;
         function updateCountdown() {
             const now = new Date();
@@ -470,7 +553,7 @@
         setInterval(updateCountdown, 1000);
         updateCountdown();
 
-        // Снежинки
+        // ===== СНЕЖИНКИ =====
         function createSnow() {
             for (let i = 0; i < 60; i++) {
                 const snow = document.createElement('div');
@@ -485,7 +568,7 @@
         }
         createSnow();
 
-        // Back to top
+        // ===== BACK TO TOP =====
         (function(){
             const btn = document.getElementById('backToTop');
             window.addEventListener('scroll', ()=>{ if (window.scrollY > 250) btn.classList.add('visible'); else btn.classList.remove('visible'); });

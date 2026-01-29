@@ -13,53 +13,40 @@
     <!-- Звёзды на фоне -->
     <div class="stars" id="stars"></div>
 
-    <!-- ХЭДЕР С БУРГЕР-МЕНЮ -->
-    <header class="header" id="header">
-        <!-- Бургер-меню для мобильных -->
-        <button class="hamburger-menu" id="hamburgerMenu" aria-label="Меню">
-            <span class="hamburger-icon"></span>
-            <span class="hamburger-icon"></span>
-            <span class="hamburger-icon"></span>
-        </button>
+    <!-- Бургер-меню для мобильных -->
+    <button class="hamburger-menu" onclick="toggleMenu()">☰</button>
 
-        <!-- Логотип/Заголовок -->
-        <div class="header-title">
-            <h1>🎂 Кися</h1>
-        </div>
-
-        <!-- Навигация -->
-        <nav class="navbar" id="navbar">
-            <ul id="navMenu">
-                <li><a href="index.html"><i class="fas fa-home"></i>Главная</a></li>
-                <li><a href="gallery.html"><i class="fas fa-images"></i>Фотогалерея</a></li>
-                <li><a href="wishes.html"><i class="fas fa-heart"></i>Пожелания</a></li>
-                <li><a href="memories.html"><i class="fas fa-book"></i>Воспоминания</a></li>
-                <li><a href="games.html"><i class="fas fa-gamepad"></i>Игры</a></li>
-                <li><a href="music.html"><i class="fas fa-music"></i>Музыка</a></li>
-                <li><a href="surprises.html"><i class="fas fa-gift"></i>Сюрпризы</a></li>
-                <li><a href="confessions.html"><i class="fas fa-comment-heart"></i>Признания</a></li>
-            </ul>
-        </nav>
-    </header>
+    <!-- Навигация -->
+    <nav class="navbar" id="navbar">
+        <ul id="navMenu">
+            <li><a href="index.html"><i class="fas fa-home"></i>Главная</a></li>
+            <li><a href="gallery.html"><i class="fas fa-images"></i>Фотогалерея</a></li>
+            <li><a href="wishes.html"><i class="fas fa-heart"></i>Пожелания</a></li>
+            <li><a href="memories.html"><i class="fas fa-book"></i>Воспоминания</a></li>
+            <li><a href="games.html"><i class="fas fa-gamepad"></i>Игры</a></li>
+            <li><a href="music.html"><i class="fas fa-music"></i>Музыка</a></li>
+            <li><a href="surprises.html"><i class="fas fa-gift"></i>Сюрпризы</a></li>
+            <li><a href="confessions.html"><i class="fas fa-comment-heart"></i>Признания</a></li>
+        </ul>
+    </nav>
 
     <!-- Главный контейнер -->
     <div class="container">
         <!-- Заголовок -->
-        <h2 class="pulsing">🎉 С Днём Рождения, моя любимая Женаа! 🎉</h2>
+        <h1 class="pulsing">🎉 С Днём Рождения, моя любимая Женаа! 🎉</h1>
         <p class="typing-text subtitle" id="subtitle">Ты — моё солнышко, моя радость и моё всё...</p>
-        
         <div style="text-align:center; margin-top:20px;">
-            <button class="btn btn-pink" onclick="openSurpriseModal()">Открыть сюрприз 🎁</button>
+            <button class="btn btn-pink btn-glow" onclick="openSurpriseModal()">Открыть сюрприз 🎁</button>
             <div style="margin-top:15px;">
-                <input id="quickWish" placeholder="Можна написать пожелание..." style="padding:14px; border-radius:12px; border:2px solid #ff2d95; width:100%; font-size:16px; background:rgba(255,255,255,0.1); color:white; margin-top:12px;">
+                <input id="quickWish" placeholder="Можна написать пожелание..." style="padding:14px; border-radius:12px; border:2px solid var(--primary); width:100%; font-size:16px; background:rgba(255,255,255,0.1); color:white; margin-top:12px;">
                 <button class="btn btn-green" onclick="saveQuickWish()" style="margin-top:12px;">Отправить</button>
             </div>
         </div>
         
         <!-- Основная карточка -->
-        <div class="card animated-border">
-            <h3>🎂 Тебе сегодня 16! 🎂</h3>
-            <p style="font-size: 18px; text-align: center; line-height: 1.8;">
+        <div class="card animated-border" style="--delay: 1;">
+            <h2>🎂 Тебе сегодня 16! 🎂</h2>
+            <p style="font-size: 19px; text-align: center; line-height: 1.8;">
                 Моя родная, любимая, самая прекрасная Кися!<br>
                 Сегодня твой особенный день, и я хочу поздравить тебя от всей души!<br><br>
                 
@@ -74,7 +61,7 @@
         </div>
 
         <!-- Специальное сообщение -->
-        <div class="card yellow-gradient">
+        <div class="card yellow-gradient" style="--delay: 2;">
             <h3>💌 Особенное послание от меня:</h3>
             <p style="font-size: 17px; line-height: 1.8; text-align: center;">
                 Любимая, ты — мое счастье, моя кошка)), моя жизнь!<br>
@@ -96,19 +83,19 @@
         </div>
 
         <!-- Таймер до следующего дня рождения -->
-        <div class="card">
+        <div class="card" style="--delay: 3;">
             <h3>⏳ До твоего следующего дня рождения:</h3>
             <div id="countdown" style="font-size: 38px; text-align: center; font-weight: 700; color: #ff2d95; text-shadow: 0 0 15px rgba(255, 45, 149, 0.5);"></div> 
         </div>
 
         <!-- Интерактивная зона -->
-        <div class="card purple-gradient">
+        <div class="card purple-gradient" style="--delay: 4;">
             <h3 style="color: white;">✨ Интерактивная зона</h3>
             <p style="text-align: center; font-size: 20px; color: rgba(255,255,255,0.95);">
                 Нажми на меня, и я скажу тебе что-то особенное! 👇
             </p>
             <div style="text-align: center; margin-top: 25px;">
-                <button class="btn btn-purple" onclick="showSpecialMessage()">Послушать признание</button>
+                <button class="btn btn-purple btn-glow" onclick="showSpecialMessage()">Послушать признание</button>
             </div>
 
             <div class="activity-grid">
@@ -155,9 +142,9 @@
         </div>
 
         <!-- Цитата дня -->
-        <div class="card border-left">
+        <div class="card border-left" style="--delay: 5;">
             <h3>💭 Цитата для тебя сегодня:</h3>
-            <p style="font-size: 24px; font-style: italic; text-align: center; color: #ff66b2;">
+            <p style="font-size: 24px; font-style: italic; text-align: center; color: #ff66b2; font-family: 'Dancing Script', cursive;">
                 "Любовь — это не то, что говорят. Любовь — это то, что делают."
             </p>
         </div>
@@ -167,10 +154,10 @@
     <div class="modal" id="surpriseModal">
         <div class="modal-content">
             <span class="modal-close" onclick="closeSurpriseModal()">✖</span>
-            <h3 class="gradient-text">Сюрприз для Киси 🎁</h3>
+            <h2 class="gradient-text">Сюрприз для Киси 🎁</h2>
             <p style="text-align:center; font-size:19px; margin-top:15px;">Кися, нажми на кнопку — я тебя очень люблю!</p>
             <div style="text-align:center; margin-top:25px;">
-                <button class="btn btn-pink" onclick="runSurprise()">Подарок!</button>
+                <button class="btn btn-pink btn-glow" onclick="runSurprise()">Подарок!</button>
             </div>
         </div>
     </div>
@@ -191,8 +178,6 @@
         // ===== СОЗДАНИЕ ЗВЁЗД НА ФОНЕ =====
         function createStars() {
             const starsContainer = document.getElementById('stars');
-            if (!starsContainer) return;
-            
             for (let i = 0; i < 100; i++) {
                 const star = document.createElement('div');
                 star.className = 'star';
@@ -202,80 +187,70 @@
                 star.style.top = `${Math.random() * 100}%`;
                 star.style.setProperty('--duration', `${Math.random() * 3 + 2}s`);
                 star.style.setProperty('--delay', `${Math.random() * 2}s`);
-                star.style.opacity = `${Math.random() * 0.5 + 0.2}`;
                 starsContainer.appendChild(star);
             }
         }
         createStars();
 
-        // ===== СКРЫТИЕ ХЭДЕРА ПРИ ПРОКРУТКЕ =====
-        const header = document.getElementById('header');
+        // ===== СКРЫТИЕ ШАПКИ ПРИ ПРОКРУТКЕ =====
         let lastScrollPosition = 0;
-        let ticking = false;
+        const navbar = document.getElementById('navbar');
+        const navbarHeight = navbar.offsetHeight;
 
-        function updateHeaderPosition() {
+        window.addEventListener('scroll', () => {
             const currentScrollPosition = window.pageYOffset;
 
-            // Если прокручиваем вниз - скрываем
-            if (currentScrollPosition > lastScrollPosition && currentScrollPosition > 100) {
-                header.classList.add('hidden');
+            // Проверяем, не находимся ли мы в начале страницы
+            if (currentScrollPosition < navbarHeight) {
+                navbar.classList.remove('hidden');
+                navbar.classList.add('visible');
+                lastScrollPosition = currentScrollPosition;
+                return;
+            }
+
+            // Скрываем шапку при прокрутке вниз
+            if (currentScrollPosition > lastScrollPosition && !navbar.classList.contains('hidden')) {
+                navbar.classList.remove('visible');
+                navbar.classList.add('hidden');
             } 
-            // Если прокручиваем вверх - показываем
-            else if (currentScrollPosition < lastScrollPosition || currentScrollPosition < 100) {
-                header.classList.remove('hidden');
+            // Показываем шапку при прокрутке вверх
+            else if (currentScrollPosition < lastScrollPosition && navbar.classList.contains('hidden')) {
+                navbar.classList.remove('hidden');
+                navbar.classList.add('visible');
             }
 
             lastScrollPosition = currentScrollPosition;
-            ticking = false;
-        }
-
-        window.addEventListener('scroll', () => {
-            if (!ticking) {
-                window.requestAnimationFrame(updateHeaderPosition);
-                ticking = true;
-            }
         });
 
         // ===== БУРГЕР-МЕНЮ =====
-        const hamburgerMenu = document.getElementById('hamburgerMenu');
-        const navMenu = document.getElementById('navMenu');
-
-        hamburgerMenu.addEventListener('click', () => {
-            navMenu.classList.toggle('active');
-            hamburgerMenu.classList.toggle('active');
-        });
+        function toggleMenu() {
+            const menu = document.getElementById('navMenu');
+            menu.classList.toggle('active');
+        }
 
         // Закрытие меню при клике на ссылку
         document.querySelectorAll('#navMenu a').forEach(link => {
             link.addEventListener('click', () => {
-                navMenu.classList.remove('active');
-                hamburgerMenu.classList.remove('active');
+                document.getElementById('navMenu').classList.remove('active');
             });
         });
 
         // Закрытие меню при клике вне меню
         document.addEventListener('click', (e) => {
-            if (navMenu.classList.contains('active') && 
-                !navMenu.contains(e.target) && 
-                !hamburgerMenu.contains(e.target)) {
-                navMenu.classList.remove('active');
-                hamburgerMenu.classList.remove('active');
+            const menu = document.getElementById('navMenu');
+            const hamburger = document.querySelector('.hamburger-menu');
+            
+            if (menu.classList.contains('active') && 
+                !menu.contains(e.target) && 
+                !hamburger.contains(e.target)) {
+                menu.classList.remove('active');
             }
         });
 
         // Закрытие меню при прокрутке на мобильных
         window.addEventListener('scroll', () => {
-            if (window.innerWidth <= 768 && navMenu.classList.contains('active')) {
-                navMenu.classList.remove('active');
-                hamburgerMenu.classList.remove('active');
-            }
-        });
-
-        // Закрытие меню при изменении размера окна
-        window.addEventListener('resize', () => {
-            if (window.innerWidth > 768) {
-                navMenu.classList.remove('active');
-                hamburgerMenu.classList.remove('active');
+            if (window.innerWidth <= 768) {
+                document.getElementById('navMenu').classList.remove('active');
             }
         });
 

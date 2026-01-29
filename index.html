@@ -8,6 +8,9 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body data-birthday="02-01">
+    <!-- Звёзды на фоне -->
+    <div class="stars" id="stars"></div>
+
     <!-- Бургер-меню для мобильных -->
     <button class="hamburger-menu" onclick="toggleMenu()">☰</button>
 
@@ -30,18 +33,18 @@
         <!-- Заголовок -->
         <h1 class="pulsing">🎉 С Днём Рождения, моя любимая Женаа! 🎉</h1>
         <p class="typing-text subtitle" id="subtitle">Ты — моё солнышко, моя радость и моё всё...</p>
-        <div style="text-align:center; margin-top:12px;">
-            <button class="btn btn-pink" onclick="openSurpriseModal()">Открыть сюрприз 🎁</button>
-            <div style="margin-top:10px;">
-                <input id="quickWish" placeholder="Можна написать пожелание..." style="padding:12px; border-radius:10px; border:2px solid #ff2d95; width:100%; font-size:16px; margin-top:10px;">
-                <button class="btn btn-green" onclick="saveQuickWish()" style="margin-top:10px;">Отправить</button>
+        <div style="text-align:center; margin-top:20px;">
+            <button class="btn btn-pink btn-glow" onclick="openSurpriseModal()">Открыть сюрприз 🎁</button>
+            <div style="margin-top:15px;">
+                <input id="quickWish" placeholder="Можна написать пожелание..." style="padding:14px; border-radius:12px; border:2px solid var(--primary); width:100%; font-size:16px; background:rgba(255,255,255,0.1); color:white; margin-top:12px;">
+                <button class="btn btn-green" onclick="saveQuickWish()" style="margin-top:12px;">Отправить</button>
             </div>
         </div>
         
         <!-- Основная карточка -->
-        <div class="card animated-border">
+        <div class="card animated-border" style="--delay: 1;">
             <h2>🎂 Тебе сегодня 16! 🎂</h2>
-            <p style="font-size: 18px; text-align: center; line-height: 1.8;">
+            <p style="font-size: 19px; text-align: center; line-height: 1.8;">
                 Моя родная, любимая, самая прекрасная Кися!<br>
                 Сегодня твой особенный день, и я хочу поздравить тебя от всей души!<br><br>
                 
@@ -51,14 +54,14 @@
                 Желаю тебе море счастья, океан любви (только мне), горы удачи и небо мечтаний!<br>
                 Пусть каждый день приносит тебе радость и улыбки!<br><br>
                 
-                <strong>Ты — моя жизнь, моя любовь, моя Роднулька)))! ❤️</strong>
+                <strong class="neon-text">Ты — моя жизнь, моя любовь, моя Роднулька)))! ❤️</strong>
             </p>
         </div>
 
         <!-- Специальное сообщение -->
-        <div class="card" style="background: linear-gradient(135deg, #ffeaa7, #fdcb6e);">
+        <div class="card yellow-gradient" style="--delay: 2;">
             <h3>💌 Особенное послание от меня:</h3>
-            <p style="font-size: 16px; line-height: 1.8; text-align: center;">
+            <p style="font-size: 17px; line-height: 1.8; text-align: center;">
                 Любимая, ты — мое счастье, моя кошка)), моя жизнь!<br>
                 С тобой каждый день как праздник, каждая минута как подарок!<br><br>
                 
@@ -71,30 +74,30 @@
         </div>
 
         <!-- Анимированные элементы -->
-        <div style="text-align: center; margin: 40px 0;">
-            <div class="floating" style="font-size: 60px;">🎈</div>
-            <div class="floating" style="font-size: 50px; margin-left: 100px; animation-delay: 0.5s;">🎁</div>
-            <div class="floating" style="font-size: 55px; margin-left: 200px; animation-delay: 1s;">🎂</div>
+        <div style="text-align: center; margin: 50px 0; position: relative;">
+            <div class="floating" style="font-size: 65px; display: inline-block; margin: 0 20px;">🎈</div>
+            <div class="floating" style="font-size: 55px; display: inline-block; margin: 0 20px; animation-delay: 0.7s;">🎁</div>
+            <div class="floating" style="font-size: 60px; display: inline-block; margin: 0 20px; animation-delay: 1.4s;">🎂</div>
         </div>
 
         <!-- Таймер до следующего дня рождения -->
-        <div class="card">
+        <div class="card" style="--delay: 3;">
             <h3>⏳ До твоего следующего дня рождения:</h3>
-            <div id="countdown" style="font-size: 36px; text-align: center; font-weight: bold; color: #ff2d95;"></div> 
+            <div id="countdown" style="font-size: 38px; text-align: center; font-weight: 700; color: var(--primary); text-shadow: 0 0 15px rgba(255, 45, 149, 0.5);"></div> 
         </div>
 
         <!-- Интерактивная зона -->
-        <div class="card" style="background: linear-gradient(135deg, #a64ca6, #b663ff); color: white;">
+        <div class="card purple-gradient" style="--delay: 4;">
             <h3 style="color: white;">✨ Интерактивная зона</h3>
-            <p style="text-align: center; font-size: 20px;">
+            <p style="text-align: center; font-size: 20px; color: rgba(255,255,255,0.95);">
                 Нажми на меня, и я скажу тебе что-то особенное! 👇
             </p>
-            <div style="text-align: center; margin-top: 20px;">
-                <button class="btn btn-purple" onclick="showSpecialMessage()">Послушать признание</button>
+            <div style="text-align: center; margin-top: 25px;">
+                <button class="btn btn-purple btn-glow" onclick="showSpecialMessage()">Послушать признание</button>
             </div>
 
             <div class="activity-grid">
-                <div class="card activity-card" id="quizCard">
+                <div class="activity-card">
                     <h4>Викторина о нас</h4>
                     <div class="quiz">
                         <div class="q" data-idx="0">Где мы познакомились?<br><input type="text" id="q0" placeholder="Твой ответ"></div>
@@ -107,39 +110,39 @@
                         <div class="q" data-idx="7">Где мы любим больше всего гулять?<br><input type="text" id="q7" placeholder="Твой ответ"></div>
                         <div class="q" data-idx="8">Наш самый любимый ресторан?<br><input type="text" id="q8" placeholder="Твой ответ"></div>
                         <div class="q" data-idx="9">Наша самая любимая игра(именно игра)?<br><input type="text" id="q9" placeholder="Твой ответ"></div>
-                        <div style="text-align:center; margin-top:10px;">
+                        <div style="text-align:center; margin-top:15px;">
                             <button class="btn btn-green" onclick="submitQuiz()">Проверить</button>
                         </div>
-                        <p id="quizResult" style="text-align:center; margin-top:8px; font-weight:bold;"></p>
+                        <p id="quizResult" style="text-align:center; margin-top:10px; font-weight:bold;"></p>
                     </div>
                 </div>
 
-                <div class="card activity-card" id="drawCard">
+                <div class="activity-card">
                     <h4>Рисунки для любимой</h4>
                     <canvas id="drawCanvas" width="300" height="200" class="canvas-draw"></canvas>
-                    <div style="text-align:center; margin-top:10px;">
+                    <div style="text-align:center; margin-top:15px;">
                         <button class="btn btn-pink" onclick="clearCanvas()">Очистить</button>
-                        <button class="btn btn-purple" onclick="downloadCanvas()" style="margin-left:8px;">Сохранить</button>
+                        <button class="btn btn-purple" onclick="downloadCanvas()" style="margin-left:10px;">Сохранить</button>
                     </div>
                 </div>
 
-                <div class="card activity-card" id="loveCard">
+                <div class="activity-card">
                     <h4>Love Meter</h4>
                     <p>Потяни ползунок, чтобы измерить любовь 💗</p>
                     <div class="love-meter">
                         <input type="range" id="loveRange" min="0" max="100" value="75" oninput="updateLoveValue(this.value)">
-                        <div id="loveValue" style="font-weight:bold; text-align:center; margin-top:8px;">75%</div>
-                        <div style="text-align:center; margin-top:10px;"><button class="btn btn-green" onclick="revealLove()">Узнать результат</button></div>
-                        <p id="loveResult" style="text-align:center; margin-top:10px; font-weight:bold;"></p>
+                        <div id="loveValue" style="font-weight:bold; text-align:center; margin-top:10px; font-size: 30px;">75%</div>
+                        <div style="text-align:center; margin-top:15px;"><button class="btn btn-green" onclick="revealLove()">Узнать результат</button></div>
+                        <p id="loveResult" style="text-align:center; margin-top:12px; font-weight:bold;"></p>
                     </div>
                 </div>
             </div>
         </div>
 
         <!-- Цитата дня -->
-        <div class="card" style="border-left: 10px solid #ff66b2;">
+        <div class="card border-left" style="--delay: 5;">
             <h3>💭 Цитата для тебя сегодня:</h3>
-            <p style="font-size: 22px; font-style: italic; text-align: center; color: #ff66b2;">
+            <p style="font-size: 24px; font-style: italic; text-align: center; color: var(--secondary); font-family: 'Dancing Script', cursive;">
                 "Любовь — это не то, что говорят. Любовь — это то, что делают."
             </p>
         </div>
@@ -150,9 +153,9 @@
         <div class="modal-content">
             <span class="modal-close" onclick="closeSurpriseModal()">✖</span>
             <h2 class="gradient-text">Сюрприз для Киси 🎁</h2>
-            <p style="text-align:center; font-size:18px;">Кися, нажми на кнопку — я тебя очень люблю!</p>
-            <div style="text-align:center; margin-top:20px;">
-                <button class="btn btn-pink" onclick="runSurprise()">Подарок!</button>
+            <p style="text-align:center; font-size:19px; margin-top:15px;">Кися, нажми на кнопку — я тебя очень люблю!</p>
+            <div style="text-align:center; margin-top:25px;">
+                <button class="btn btn-pink btn-glow" onclick="runSurprise()">Подарок!</button>
             </div>
         </div>
     </div>
@@ -162,7 +165,7 @@
 
     <!-- Footer -->
     <footer>
-        <p>С любовью, твой котёнок❤️ | Сделано специально для тебя, Кися!</p>
+        <p>С любовью, твой котёнок ❤️ | Сделано специально для тебя, Кися!</p>
     </footer>
 
     <!-- Back to top button -->
@@ -170,6 +173,23 @@
 
     <!-- JavaScript -->
     <script>
+        // Создание звёзд на фоне
+        function createStars() {
+            const starsContainer = document.getElementById('stars');
+            for (let i = 0; i < 100; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.width = `${Math.random() * 3 + 1}px`;
+                star.style.height = star.style.width;
+                star.style.left = `${Math.random() * 100}%`;
+                star.style.top = `${Math.random() * 100}%`;
+                star.style.setProperty('--duration', `${Math.random() * 3 + 2}s`);
+                star.style.setProperty('--delay', `${Math.random() * 2}s`);
+                starsContainer.appendChild(star);
+            }
+        }
+        createStars();
+
         // Бургер-меню
         function toggleMenu() {
             const menu = document.getElementById('navMenu');
@@ -189,22 +209,22 @@
         }
 
         function getRandomColor() {
-            const colors = ['#ff2d95', '#ff8fcf', '#a64ca6', '#b663ff', '#ff66b2', '#ffd6ee'];
+            const colors = ['#ff2d95', '#ff8fcf', '#a64ca6', '#b663ff', '#ff66b2', '#ffd6ee', '#ffeb3b', '#4caf50'];
             return colors[Math.floor(Math.random() * colors.length)];
         }
 
         function showConfetti() {
             playPop();
-            for (let i = 0; i < 120; i++) createConfetti();
-            [300, 600, 1000].forEach((delay, idx) => setTimeout(()=>{ for (let i=0;i<30;i++) createConfetti(); playPop(); }, delay));
+            for (let i = 0; i < 150; i++) createConfetti();
+            [300, 600, 1000].forEach((delay, idx) => setTimeout(()=>{ for (let i=0;i<40;i++) createConfetti(); playPop(); }, delay));
         }
 
         // Сердечки
         function showHearts() {
             playPop();
-            for (let i = 0; i < 20; i++) createHeart(false);
-            const t = setInterval(()=> { createHeart(true); playPop(); }, 200);
-            setTimeout(()=> clearInterval(t), 3000);
+            for (let i = 0; i < 25; i++) createHeart(false);
+            const t = setInterval(()=> { createHeart(true); playPop(); }, 180);
+            setTimeout(()=> clearInterval(t), 3500);
         }
 
         function createHeart(fall=true) {
@@ -217,9 +237,9 @@
                 heart.style.left = (20 + Math.random()*60) + 'vw';
                 heart.style.top = (40 + Math.random()*30) + 'vh';
             }
-            heart.style.opacity = 0.95;
+            heart.style.opacity = 0.98;
             document.body.appendChild(heart);
-            setTimeout(() => heart.remove(), 5000);
+            setTimeout(() => heart.remove(), 5500);
         }
 
         // Звук
@@ -235,7 +255,7 @@
                 g.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + 0.35);
                 o.connect(g); g.connect(ctx.destination);
                 o.start(); o.stop(ctx.currentTime + 0.36);
-            } catch(e) { /* audio may be blocked until user interacts */ }
+            } catch(e) {}
         }
 
         // Модальное окно
@@ -271,7 +291,7 @@
             if (!t) return;
             t.innerText = msg;
             t.classList.add('visible');
-            setTimeout(()=> t.classList.remove('visible'), 3000);
+            setTimeout(()=> t.classList.remove('visible'), 3200);
         }
 
         // Особенное сообщение
@@ -284,11 +304,13 @@
                 'С тобой я готов на всё, моя родная! 🌹',
                 'Ты — единственная, кого я хочу видеть рядом всегда! 💕',
                 'Моё сердце принадлежит только тебе, Кися! 💓',
-                'Ты — моя жизнь, моя любовь, моя вселенная! 🌍'
+                'Ты — моя жизнь, моя любовь, моя вселенная! 🌍',
+                'Каждый день с тобой — это подарок судьбы! 🎁',
+                'Ты освещаешь мою жизнь своим светом! ✨'
             ];
             
             const randomMessage = messages[Math.floor(Math.random() * messages.length)];
-            alert(randomMessage);
+            showToast(randomMessage);
         }
 
         // Викторина
@@ -323,14 +345,21 @@
             
             if (correctCount >= 10) {
                 out.innerText = 'Отлично! Ты хорошо помнишь наши моменты ❤️';
+                out.style.color = '#4caf50';
                 showConfetti(); 
-                setTimeout(()=>{ for(let i=0;i<8;i++) createHeart(false); }, 300);
+                setTimeout(()=>{ for(let i=0;i<10;i++) createHeart(false); }, 300);
+            } else if (correctCount >= 7) {
+                out.innerText = `Замечательно! ${correctCount} из 10 — ты настоящая любовница наших воспоминаний! 💖`;
+                out.style.color = '#8bc34a';
             } else if (correctCount >= 5) {
                 out.innerText = `Хорошо! ${correctCount} из 10 ответов правильные. Почти все верно! 💪`;
+                out.style.color = '#ff9800';
             } else if (correctCount >= 3) {
                 out.innerText = `Уже близко! ${correctCount} из 10. Попробуй ещё разок 🌟`;
+                out.style.color = '#ff5722';
             } else {
                 out.innerText = `Только ${correctCount} из 10... Давай, вспоминай лучше! 😊`;
+                out.style.color = '#f44336';
             }
         }
 
@@ -342,7 +371,7 @@
             ctx.lineCap = 'round';
             ctx.lineJoin = 'round';
             ctx.strokeStyle = '#ff2d95';
-            ctx.lineWidth = 4;
+            ctx.lineWidth = 5;
             let drawing = false;
             let last = null;
 
@@ -358,7 +387,7 @@
             canvas.addEventListener('pointerleave', ()=>{ drawing=false; last=null; });
 
             window.clearCanvas = function(){ ctx.clearRect(0,0,canvas.width,canvas.height); };
-            window.downloadCanvas = function(){ const link = document.createElement('a'); link.href = canvas.toDataURL('image/png'); link.download = 'kiss_for_kisi.png'; link.click(); };
+            window.downloadCanvas = function(){ const link = document.createElement('a'); link.href = canvas.toDataURL('image/png'); link.download = 'drawing_for_kisi.png'; link.click(); };
         })();
 
         // Love Meter
@@ -371,12 +400,27 @@
             const out = document.getElementById('loveResult');
             if (!out) return;
             let msg = '';
-            if (v > 90) msg = 'Бесконечная любовь! Я твой навсегда! 💞';
-            else if (v > 70) msg = 'Много любви — целую бесконечно! 💗';
-            else if (v > 40) msg = 'Сердце полно тепла — ты мне дорога! 💕';
-            else msg = 'Любовь растёт — ещё немного и будет идеально! 🌱';
+            if (v > 95) {
+                msg = 'АБСОЛЮТНАЯ ЛЮБОВЬ! 💘💘💘';
+                out.style.color = '#ff2d95';
+            } else if (v > 90) {
+                msg = 'Бесконечная любовь! Я твой навсегда! 💞';
+                out.style.color = '#ff4081';
+            } else if (v > 70) {
+                msg = 'Много любви — целую бесконечно! 💗';
+                out.style.color = '#ff66b2';
+            } else if (v > 40) {
+                msg = 'Сердце полно тепла — ты мне дорога! 💕';
+                out.style.color = '#ff8fcf';
+            } else {
+                msg = 'Любовь растёт — ещё немного и будет идеально! 🌱';
+                out.style.color = '#ffb74d';
+            }
             out.innerText = msg;
-            if (v > 40) { showConfetti(); for(let i=0;i<6;i++) createHeart(false); }
+            if (v > 40) { 
+                showConfetti(); 
+                for(let i=0;i<8;i++) createHeart(false); 
+            }
         }
 
         // Таймер обратного отсчета
@@ -399,10 +443,15 @@
 
             const diff = target - now;
             if (diff <= 0) {
-                document.getElementById('countdown').innerHTML = 'С днём рождения! ❤️';
+                document.getElementById('countdown').innerHTML = '<span style="font-size: 42px;">🎉 С ДНЁМ РОЖДЕНИЯ! 🎉</span>';
                 if (!birthdayTriggered) {
                     birthdayTriggered = true;
-                    setTimeout(()=>{ showConfetti(); showHearts(); document.title = 'С Днём Рождения, Кися! 🎉'; }, 500);
+                    setTimeout(()=>{ 
+                        showConfetti(); 
+                        showHearts(); 
+                        document.title = '🎉 С Днём Рождения, Кися! 🎉';
+                        showToast('С Днём Рождения, моя любимая! ❤️');
+                    }, 500);
                 }
                 return;
             }
@@ -412,7 +461,10 @@
             const seconds = Math.floor((diff % (1000 * 60)) / 1000);
             
             document.getElementById('countdown').innerHTML = 
-                `${days} дней ${hours} часов ${minutes} минут ${seconds} секунд`;
+                `<span style="color: #ff2d95;">${days}</span> дней 
+                 <span style="color: #ff8fcf;">${hours}</span> часов 
+                 <span style="color: #a64ca6;">${minutes}</span> минут 
+                 <span style="color: #b663ff;">${seconds}</span> секунд`;
         }
 
         setInterval(updateCountdown, 1000);
@@ -420,13 +472,13 @@
 
         // Снежинки
         function createSnow() {
-            for (let i = 0; i < 50; i++) {
+            for (let i = 0; i < 60; i++) {
                 const snow = document.createElement('div');
                 snow.className = 'snow';
                 snow.style.left = Math.random() * 100 + 'vw';
-                snow.style.animationDuration = (Math.random() * 5 + 5) + 's';
-                snow.style.opacity = Math.random();
-                snow.style.width = (Math.random() * 10 + 5) + 'px';
+                snow.style.animationDuration = (Math.random() * 8 + 6) + 's';
+                snow.style.opacity = Math.random() * 0.6 + 0.2;
+                snow.style.width = (Math.random() * 8 + 3) + 'px';
                 snow.style.height = snow.style.width;
                 document.body.appendChild(snow);
             }
@@ -436,7 +488,7 @@
         // Back to top
         (function(){
             const btn = document.getElementById('backToTop');
-            window.addEventListener('scroll', ()=>{ if (window.scrollY > 200) btn.classList.add('visible'); else btn.classList.remove('visible'); });
+            window.addEventListener('scroll', ()=>{ if (window.scrollY > 250) btn.classList.add('visible'); else btn.classList.remove('visible'); });
             btn.addEventListener('click', ()=> window.scrollTo({top:0, behavior:'smooth'}));
             btn.addEventListener('keydown', (e)=>{ if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); window.scrollTo({top:0, behavior:'smooth'}); } });
         })();
